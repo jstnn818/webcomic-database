@@ -16,6 +16,14 @@ export const seriesReducer = (state, action) => {
         return {
           series: state.series.filter((w) => w._id !== action.payload._id)
         }
+      case 'GET_SERIES':
+          // Find the series with the matching _id
+        const foundSeries = state.series.find((series) => series._id === action.payload._id);
+          
+          // Return the single series object, or return an empty object if not found
+        return {
+          series: foundSeries ? [foundSeries] : [],
+        };
       default:
         return state
     }
