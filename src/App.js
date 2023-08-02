@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 //pages and components
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
-import SeriesPage from './components/SeriesPage'
+import SeriesPage from './pages/SeriesPage'
 
 function App() {
   return (
