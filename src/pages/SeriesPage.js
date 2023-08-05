@@ -1,53 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useChaptersContext } from '../hooks/useChaptersContext'
+import { useSeriesContext } from '../hooks/useSeriesContext'
 import ChapterForm from '../components/ChapterForm'
 
 const SeriesPage = () => {
 
-  const { chapters, dispatch } = useChaptersContext()
   const { seriesId } = useParams()
-  const [ series, setSeries ]  = useState(null)
+  const { series, dispatch} = useSeriesContext()
+  const [ seriesOne, setSeriesOne ] = useState(null)
     
-
   useEffect(() => {
-      const fetchSeries = async () => {
-        const response = await fetch(`http://localhost:4000/api/series/${seriesId}`)
+      const fetchSeriesOne = async () => {
+        const response = await fetch('/api/series')
         const json = await response.json()
     
         if (response.ok) {
-          setSeries(json)
+          dispatch({type: 'SET_SERIES', payload: json})
         }
+        setSeriesOne(json.find((w) => w._id === seriesId))
       }
-      fetchSeries()
-    }, [seriesId])
-
-    useEffect(() => {
-      const fetchChapters = async () => {
-        const response = await fetch('/api/chapters')
-        const json = await response.json()
+      fetchSeriesOne()
+    }, [seriesId, series, dispatch])
     
-        if (response.ok) {
-          dispatch({type: 'SET_CHAPTER', payload: json})
-        }
-      }
-      fetchChapters()
-    }, [dispatch])
-    
-    if (!series) {
+    if (!seriesOne) {
       return <div>Loading...</div>
     }
-
-      
 
     return (
       <div>
         <div className="series-details">
-          <h4> {series.title} </h4>
-          <p><strong> Author: </strong> {series.author} </p>
+          <h4> {seriesOne.title} </h4>
+          <p><strong> Author: </strong> {seriesOne.author} </p>
         </div>
         <div className="chapters">
-          {chapters && chapters.map(chapter => (
+          {seriesOne.chapters && seriesOne.chapters.map(chapter => (
             <div className="chapter-row">
               <p> 
                 <strong>{chapter.number}</strong> {chapter.title} 
@@ -55,7 +41,7 @@ const SeriesPage = () => {
             </div>
           ))}
         </div>
-        <ChapterForm />
+        <ChapterForm seriesOne={seriesOne} />
       </div>
     )  
 }

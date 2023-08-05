@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const SeriesDetails = ({ series }) => {
+const SeriesDetails = ({ seriesOne }) => {
     const { dispatch } = useSeriesContext()
 
     /*const linkName = ( name ) => {
@@ -12,7 +12,7 @@ const SeriesDetails = ({ series }) => {
     }*/
 
     const handleClick = async () => {
-        const response = await fetch('api/series/' + series._id, {
+        const response = await fetch('api/series/' + seriesOne._id, {
             method: 'DELETE'
         })
         const json = await response.json()
@@ -24,12 +24,12 @@ const SeriesDetails = ({ series }) => {
 
     return (
         <div className="series-details">
-            <Link to={'/series/' + series._id}>
-                <h4> {series.title} </h4>
+            <Link to={'/series/' + seriesOne._id}>
+                <h4> {seriesOne.title} </h4>
             </Link>
-            <p><strong> Author: </strong>{series.author}</p>
-            <p><strong> Cover: </strong>{series.cover}</p>
-            <p>{formatDistanceToNow(new Date(series.createdAt), { addSuffix: true })}</p>
+            <p><strong> Author: </strong>{seriesOne.author}</p>
+            <p><strong> Cover: </strong>{seriesOne.cover}</p>
+            <p>{formatDistanceToNow(new Date(seriesOne.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
         </div>
     )

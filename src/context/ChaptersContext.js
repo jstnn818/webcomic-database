@@ -17,10 +17,7 @@ export const chaptersReducer = (state, action) => {
           chapters: state.chapters.filter((w) => w._id !== action.payload._id)
         }
       case 'GET_CHAPTER':
-          // Find the chapter with the matching _id
         const foundChapter = state.chapters.find((chapter) => chapter._id === action.payload._id);
-          
-          // Return the single chapter object, or return an empty object if not found
         return {
           chapters: foundChapter ? [foundChapter] : [],
         };

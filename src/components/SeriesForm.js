@@ -7,12 +7,13 @@ const SeriesForm = () => {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [cover, setCover] = useState('')
+    const [chapters, setChapters] = useState([])
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const series = {title, author, cover}
+        const series = {title, author, cover, chapters}
 
         const response = await fetch('/api/series', {
             method: 'POST',
@@ -31,6 +32,7 @@ const SeriesForm = () => {
             setTitle('')
             setAuthor('')
             setCover('')
+            setChapters([])
             setError(null)
             setEmptyFields([])
             console.log('new series added', json)
