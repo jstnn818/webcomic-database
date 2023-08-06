@@ -12,13 +12,13 @@ const SeriesDetails = ({ seriesOne }) => {
     }*/
 
     const handleClick = async () => {
-        const response = await fetch('api/series/' + seriesOne._id, {
+        const response = await fetch(`http://localhost:4000/api/series/${seriesOne._id}`, {
             method: 'DELETE'
         })
         const json = await response.json()
 
         if (response.ok) {
-            dispatch({type: 'DELETE_SERIES', payload: json})
+            dispatch({type: 'DELETE_SERIES', payload: json.series})
         }
     }
 

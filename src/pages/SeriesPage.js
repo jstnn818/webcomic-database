@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSeriesContext } from '../hooks/useSeriesContext'
 import ChapterForm from '../components/ChapterForm'
+import ChapterDetails from '../components/ChapterDetails'
 
 const SeriesPage = () => {
 
@@ -11,7 +12,7 @@ const SeriesPage = () => {
     
   useEffect(() => {
       const fetchSeriesOne = async () => {
-        const response = await fetch('/api/series')
+        const response = await fetch('http://localhost:4000/api/series')
         const json = await response.json()
     
         if (response.ok) {
@@ -34,11 +35,7 @@ const SeriesPage = () => {
         </div>
         <div className="chapters">
           {seriesOne.chapters && seriesOne.chapters.map(chapter => (
-            <div className="chapter-row">
-              <p> 
-                <strong>{chapter.number}</strong> {chapter.title} 
-              </p>
-            </div>
+            <ChapterDetails seriesOne={seriesOne} key={chapter._id} chapter={chapter}/>
           ))}
         </div>
         <ChapterForm seriesOne={seriesOne} />
