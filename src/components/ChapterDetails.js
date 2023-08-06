@@ -1,4 +1,5 @@
 import { useSeriesContext } from '../hooks/useSeriesContext'
+import { Link } from 'react-router-dom'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const ChapterDetails = ({ chapter, seriesOne }) => {
@@ -25,7 +26,6 @@ const ChapterDetails = ({ chapter, seriesOne }) => {
             method: 'DELETE'
         })
         const json = await response.json()
-        // THIS ISNT DELETING FOR SOME REASON
         if (response.ok) {
             console.log('chapter deleted', json)
         }
@@ -33,7 +33,9 @@ const ChapterDetails = ({ chapter, seriesOne }) => {
 
     return (
         <div className="series-details">
-            <h4> {chapter.title} </h4>
+            <Link to={`/series/${seriesOne._id}/${chapter._id}`}>
+                <h4> {seriesOne.title} </h4>
+            </Link>
             <p>{formatDistanceToNow(new Date(chapter.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
         </div>
