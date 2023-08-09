@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import PageDetails from '../components/PageDetails'
 
 const ChapterPage = () => {
     const { chapterId } = useParams()
@@ -20,16 +21,9 @@ const ChapterPage = () => {
         const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`)
         const json = await response.json()
         setChapter(json)
+        setPages(json.pages)
       }
-
-      const fetchPages = async () => {
-        const response = await fetch(`http://localhost:4000/api/uploads/`)
-        const json = await response.json()
-        setPages(json)
-      }
-
       fetchChapter()
-      fetchPages()
     }, [chapterId])
 
     const prevPage = () => {
@@ -51,18 +45,12 @@ const ChapterPage = () => {
 
     const pageRenderer = () => {
       if (onePageView) {
-        const singlePicture = pages[[pageNumber]]
-        const base64String = btoa(
-          String.fromCharCode(...new Uint8Array((singlePicture.image.data.data)))
-        )
-        return (<img alt="test" src={`data:image/png;base64,${base64String}`} width="300"/>)
+        const singlePicture = pages[pageNumber]
+        return <PageDetails pageId={singlePicture}></PageDetails>
       }
       else {
         return pages.map((singlePicture) => {
-          const base64String = btoa(
-            String.fromCharCode(...new Uint8Array((singlePicture.image.data.data)))
-          )
-          return (<img alt="hi" src={`data:image/png;base64,${base64String}`} width="300"/>)
+          return <PageDetails pageId={singlePicture}></PageDetails>
         })
       }
     }
