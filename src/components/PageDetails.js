@@ -13,9 +13,9 @@ const PageDetails = ({ pageId }) => {
     }, [pageId])
 
     const imageConverter = () => {
-        const base64String = btoa(
-            String.fromCharCode(...new Uint8Array((page.image.data.data)))
-        )
+        const base64String = btoa(new Uint8Array(page.image.data.data).reduce(function (data, byte) {
+            return data + String.fromCharCode(byte)
+        }, ''))
         return <img alt="test" src={`data:image/png;base64,${base64String}`} width="300"/>
     }
 

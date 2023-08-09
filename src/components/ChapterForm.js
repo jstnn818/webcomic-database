@@ -51,6 +51,7 @@ const ChapterForm = (props) => {
             if (response.ok) {
                 setTitle('')
                 setNumber('')
+                setImages([])
                 setError(null)
                 setEmptyFields([])
                 console.log('new chapter added', json)

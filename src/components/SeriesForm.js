@@ -6,40 +6,65 @@ const SeriesForm = () => {
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
-    const [cover, setCover] = useState('')
+    const [image, setImage] = useState(null)
     const [chapters, setChapters] = useState([])
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const series = {title, author, cover, chapters}
 
-        const response = await fetch('/api/series', {
-            method: 'POST',
-            body: JSON.stringify(series),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json()
+        const uploadImage = async (image) => {
+            const coverData = new FormData()
+            coverData.append('name', 'cover')
+            coverData.append('testImage', image)
 
-        if (!response.ok) {
-            setError(json.error)
-            setEmptyFields(json.emptyFields)
+            console.log(coverData)
+        
+            const response = await fetch('http://localhost:4000/api/images', {
+                method: 'POST',
+                body: coverData,
+            })
+        
+            const json = await response.json()
+            console.log(json)
+            return json
         }
-        if (response.ok) {
-            setTitle('')
-            setAuthor('')
-            setCover('')
-            setChapters([])
-            setError(null)
-            setEmptyFields([])
-            console.log('new series added', json)
-            dispatch({type: 'CREATE_SERIES', payload: json})
+
+        try {
+            var cover = null
+            if (image) {
+                cover = await uploadImage(image)
+            }
+            const series = {title, author, cover, chapters}
+
+            const response = await fetch('/api/series', {
+                method: 'POST',
+                body: JSON.stringify(series),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const json = await response.json()
+    
+            if (!response.ok) {
+                setError(json.error)
+                setEmptyFields(json.emptyFields)
+            }
+            if (response.ok) {
+                setTitle('')
+                setAuthor('')
+                setChapters([])
+                setImage(null)
+                setError(null)
+                setEmptyFields([])
+                console.log('new series added', json)
+                dispatch({type: 'CREATE_SERIES', payload: json})
+            }
+        } catch (error) {
+            console.error('Error uploading images:', error)
         }
     }
-
 
     return (
         <form className="create" onSubmit={ handleSubmit } encType=''>
@@ -63,9 +88,8 @@ const SeriesForm = () => {
 
             <label> Cover: </label>
             <input
-                type="text"
-                onChange={(e) => setCover(e.target.value)}
-                value={cover}
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
                 className={emptyFields.includes('cover') ? 'error' : ''}
             ></input>
 
