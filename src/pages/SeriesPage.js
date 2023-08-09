@@ -34,8 +34,8 @@ const SeriesPage = () => {
           <p><strong> Author: </strong> {seriesOne.author} </p>
         </div>
         <div className="chapters">
-          {seriesOne.chapters && seriesOne.chapters.map(chapter => (
-            <ChapterDetails seriesOne={seriesOne} key={chapter._id} chapter={chapter}/>
+          {seriesOne.chapters && seriesOne.chapters.map(chapterId => (
+            <ChapterDetails seriesOne={seriesOne} key={chapterId} chapterId={chapterId}/>
           ))}
         </div>
         <ChapterForm seriesOne={seriesOne} />

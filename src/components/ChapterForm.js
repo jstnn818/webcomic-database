@@ -35,7 +35,7 @@ const ChapterForm = (props) => {
             console.log('new chapter added', json)
   
             const updatedSeries = {
-              chapters: [...seriesOne.chapters, json]
+              chapters: [...seriesOne.chapters, json._id]
             }
             const responseSeries = await fetch(`http://localhost:4000/api/series/${seriesOne._id}`, {
               method: 'PATCH',

@@ -1,14 +1,26 @@
-import { useSeriesContext } from '../hooks/useSeriesContext'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useSeriesContext } from '../hooks/useSeriesContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const ChapterDetails = ({ chapter, seriesOne }) => {
+const ChapterDetails = ({ chapterId, seriesOne }) => {
+
     const { dispatch } = useSeriesContext()
+    const [ chapter, setChapter ] = useState(null)
+
+    useEffect(() => {
+        const fetchChapter = async () => {
+            const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`)
+            const json = await response.json()
+            setChapter(json)
+        }
+        fetchChapter()
+    }, [chapterId])
 
     const handleClick = async () => {
 
         const updatedSeries = {
-            chapters: seriesOne.chapters.filter((w) => w._id !== chapter._id)
+            chapters: seriesOne.chapters.filter((w) => w !== chapterId)
         }
         const responseSeries = await fetch(`http://localhost:4000/api/series/${seriesOne._id}`, {
             method: 'PATCH',
@@ -22,7 +34,7 @@ const ChapterDetails = ({ chapter, seriesOne }) => {
             dispatch({type: 'UPDATE_SERIES', payload: jsonSeries})
         }
 
-        const response = await fetch(`http://localhost:4000/api/chapters/${chapter._id}`, {
+        const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`, {
             method: 'DELETE'
         })
         const json = await response.json()
@@ -31,10 +43,14 @@ const ChapterDetails = ({ chapter, seriesOne }) => {
         }
     }
 
+    if (!chapter) {
+        return <div></div>
+    }
+
     return (
         <div className="series-details">
-            <Link to={`/series/${seriesOne._id}/${chapter._id}`}>
-                <h4> {seriesOne.title} </h4>
+            <Link to={`/series/${seriesOne._id}/${chapterId}`}>
+                <h4> {chapter.title} </h4>
             </Link>
             <p>{formatDistanceToNow(new Date(chapter.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>

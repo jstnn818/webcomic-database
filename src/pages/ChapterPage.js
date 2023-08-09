@@ -2,31 +2,35 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 const ChapterPage = () => {
-    const { seriesId, chapterId } = useParams()
+    const { chapterId } = useParams()
     const [ pages, setPages ] = useState([])
     const [ chapter, setChapter ] = useState(null)
     const [ pageNumber, setPageNumber ] = useState(0)
     const [ onePageView, setOnePageView ] = useState(true)  
 
     useEffect(() => {
-      const fetchSeriesOne = async () => {
+      /*const fetchSeriesOne = async () => {
         const response = await fetch(`http://localhost:4000/api/series/${seriesId}`)
         const json = await response.json()
 
         setChapter(json.chapters.find((w) => w._id === chapterId))
+      }*/
+
+      const fetchChapter = async () => {
+        const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`)
+        const json = await response.json()
+        setChapter(json)
       }
+
       const fetchPages = async () => {
         const response = await fetch(`http://localhost:4000/api/uploads/`)
         const json = await response.json()
         setPages(json)
       }
 
-      fetchSeriesOne()
+      fetchChapter()
       fetchPages()
-    }, [seriesId, chapterId])
-    if (!chapter) {
-        return <div>Loading...</div>
-    }
+    }, [chapterId])
 
     const prevPage = () => {
         if (pageNumber > 0) {
@@ -46,7 +50,6 @@ const ChapterPage = () => {
     }
 
     const pageRenderer = () => {
-
       if (onePageView) {
         const singlePicture = pages[[pageNumber]]
         const base64String = btoa(
@@ -62,6 +65,10 @@ const ChapterPage = () => {
           return (<img alt="hi" src={`data:image/png;base64,${base64String}`} width="300"/>)
         })
       }
+    }
+
+    if (!chapter || pages.length === 0) {
+      return <div> </div>
     }
 
     return (
