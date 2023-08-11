@@ -3,16 +3,16 @@
 
 /* layout */
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --primary: #ffffff;
+  --error: #7a0707;
 }
 body {
-  background: #f1f1f1;
+  background: #353536;
   margin: 0;
   font-family: "Poppins";
 }
 header {
-  background: #fff;
+  background: #1c1c1c;
 }
 header .container {
   max-width: 1400px;
@@ -23,7 +23,7 @@ header .container {
   justify-content: space-between;
 }
 header a {
-  color: #333;
+  color: #ffffff;
   text-decoration: none;
 }
 .pages{
@@ -35,69 +35,25 @@ header a {
 /* homepage */
 .home {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 100px;
+  grid-template-columns: 4fr 1fr;
+  gap: 50px;
 }
-.series-details, .chapter-row {
-  background: #fff;
+.series {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+}
+.chapter-row {
+  background: #1c1c1c;
+  width: 300px;
+  height: 315px;
   border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 10px auto;
+  padding: 0;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
-.series-details h4, .chapter-row h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  color: var(--primary);
-}
-.series-details p, .chapter-row p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #555;
-}
-.series-details span, .chapter-row span {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
-}
 
 /* new series form */
-label, input {
-  display: block;
-}
-input {
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-form button {
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-}
-div.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
-  border-radius: 4px;
-  margin: 20px 0;
-}
-
-input.error { 
-  border: 1px solid var(--error)
-}

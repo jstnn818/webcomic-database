@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
+import '../css/series-form.css'
+
+// Forms don't reset. value="" kinda works, but doesn't show when you have a file there either
 
 const SeriesForm = () => {
     const { dispatch } = useSeriesContext()
@@ -69,31 +72,34 @@ const SeriesForm = () => {
     return (
         <form className="create" onSubmit={ handleSubmit } encType=''>
             <h3> Add a New Series </h3>
+            <div className="form-info">
+                <label> Title: </label>
+                <input
+                    type="text"
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                    className={emptyFields.includes('title') ? 'error' : ''}
+                ></input>
 
-            <label> Title: </label>
-            <input
-                type="text"
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
-                className={emptyFields.includes('title') ? 'error' : ''}
-            ></input>
+                <label> Author: </label>
+                <input
+                    type="text"
+                    onChange={(e) => setAuthor(e.target.value)}
+                    value={author}
+                    className={emptyFields.includes('author') ? 'error' : ''}
+                ></input>
 
-            <label> Author: </label>
-            <input
-                type="text"
-                onChange={(e) => setAuthor(e.target.value)}
-                value={author}
-                className={emptyFields.includes('author') ? 'error' : ''}
-            ></input>
-
-            <label> Cover: </label>
-            <input
-                type="file"
-                onChange={(e) => setImage(e.target.files[0])}
-                className={emptyFields.includes('cover') ? 'error' : ''}
-            ></input>
-
-            <button> Add Series </button>
+                <label> Cover: </label>
+                <input
+                    id="form-upload"
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
+                    className={emptyFields.includes('cover') ? 'error' : ''}
+                ></input>
+            </div>
+            <div className="submit-button">
+                <button> Add Series </button>
+            </div>
             {error && <div className="error"> {error} </div>}
         </form>
     )

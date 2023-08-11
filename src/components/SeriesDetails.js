@@ -1,6 +1,7 @@
 import { useSeriesContext } from '../hooks/useSeriesContext'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import '../css/series-details.css'
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -30,27 +31,30 @@ const SeriesDetails = ({ seriesOne }) => {
         }
     }
 
-    if (!cover) {
-        return <div> </div>
-    }
-
     const imageConverter = () => {
+        if (!cover) {
+            return <div className="page-details"> </div>
+        }
         const base64String = btoa(new Uint8Array(cover.image.data.data).reduce(function (data, byte) {
             return data + String.fromCharCode(byte)
         }, ''))
-        return <img alt="test" src={`data:image/png;base64,${base64String}`} width="300"/>
+        return <img alt="cover" src={`data:image/png;base64,${base64String}`} width="150" height="235"/>
     }
 
     return (
         <div className="series-details">
-            <Link to={'/series/' + seriesOne._id}>
+            <Link to={'/series/' + seriesOne._id} style={{ textDecoration: 'none' }}>
                 <h4> {seriesOne.title} </h4>
             </Link>
-            <p><strong> Author: </strong>{seriesOne.author}</p>
-            <div className="page-details">
-                {imageConverter()}
+            <div className="series-description">
+                <div className="page-details">
+                    {imageConverter()}
+                </div>
+                <div className="description"> 
+                    <p><strong> {seriesOne.author} </strong></p>
+                </div>
             </div>
-            <p>{formatDistanceToNow(new Date(seriesOne.createdAt), { addSuffix: true })}</p>
+            <p className='create-date'>{formatDistanceToNow(new Date(seriesOne.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
         </div>
     )

@@ -1,0 +1,56 @@
+.series-details {
+    background: #1c1c1c;
+    width: 300px;
+    height: 315px;
+    border-radius: 4px;
+    margin: 10px auto;
+    padding: 0;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.page-detail {
+    margin: 0;
+    width: 150px;
+    height: 235px;
+}
+.series-description {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px;
+    background: #252525;
+    width: 300px;
+    height: 235px;
+}
+.description {
+    margin: 0;
+    width: 140px;
+    height: 235px;
+}
+.description p {
+    margin: 3px 0 0 5px;
+}
+.create-date {
+    margin: 5px 0 5px 10px;
+}
+.series-details h4 {
+    margin: 10px 0 10px 0;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+    color: var(--primary);
+}
+.series-details p, .chapter-row p {
+    font-size: 0.9em;
+    color: #9b9b9b;
+}
+.series-details span, .chapter-row span {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background: #353536;
+    padding: 6px;
+    border-radius: 50%;
+    color: #ffffff;
+}
