@@ -1,0 +1,39 @@
+.series-container {
+    background: #252525;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.series-title {
+    background-color: #1c1c1c;
+    border-radius: 4px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+.series-title h4 {
+    margin: 10px 0 10px 0;
+    font-size: 1.2em;
+    color: var(--primary);
+}
+.series-info {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 10px;
+    height: 300px;
+}
+.series-about p {
+    color: white;
+}
+.image-details {
+    width: 200px;
+}
+.chapter-header {
+    background-color: #1c1c1c;
+    border-radius: 4px;
+    padding: 5px 0 5px 0;
+}
+.chapter-header h4 {
+    color: white;
+    text-align: center;
+    margin: 0;
+}

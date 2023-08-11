@@ -16,7 +16,7 @@ const PageDetails = ({ pageId }) => {
         const base64String = btoa(new Uint8Array(page.image.data.data).reduce(function (data, byte) {
             return data + String.fromCharCode(byte)
         }, ''))
-        return <img alt="test" src={`data:image/png;base64,${base64String}`} width="300"/>
+        return <img alt="page-details" src={`data:image/png;base64,${base64String}`} width="600" height="900"/>
     }
 
     if (!page) {
@@ -24,7 +24,7 @@ const PageDetails = ({ pageId }) => {
     }
 
     return (
-        <div className="page-details">
+        <div className="page-details" width="600" height="900">
             {imageConverter()}
         </div>
     )

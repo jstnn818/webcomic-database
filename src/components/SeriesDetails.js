@@ -33,7 +33,7 @@ const SeriesDetails = ({ seriesOne }) => {
 
     const imageConverter = () => {
         if (!cover) {
-            return <div className="page-details"> </div>
+            return <div className="series-image-details"> </div>
         }
         const base64String = btoa(new Uint8Array(cover.image.data.data).reduce(function (data, byte) {
             return data + String.fromCharCode(byte)
@@ -47,7 +47,7 @@ const SeriesDetails = ({ seriesOne }) => {
                 <h4> {seriesOne.title} </h4>
             </Link>
             <div className="series-description">
-                <div className="page-details">
+                <div className="series-image-details">
                     {imageConverter()}
                 </div>
                 <div className="description"> 

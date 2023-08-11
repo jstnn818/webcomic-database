@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import '../css/chapter-details.css'
 
 const ChapterDetails = ({ chapterId, seriesOne }) => {
 
@@ -48,9 +49,11 @@ const ChapterDetails = ({ chapterId, seriesOne }) => {
     }
 
     return (
-        <div className="series-details">
+        <div className="chapter-details">
             <Link to={`/series/${seriesOne._id}/${chapterId}`}>
-                <h4> {chapter.title} </h4>
+                <h4> 
+                    Chapter {chapter.number}: {chapter.title} 
+                </h4>
             </Link>
             <p>{formatDistanceToNow(new Date(chapter.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>

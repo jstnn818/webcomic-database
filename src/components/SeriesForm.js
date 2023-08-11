@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
-import '../css/series-form.css'
+import '../css/form.css'
 
 // Forms don't reset. value="" kinda works, but doesn't show when you have a file there either
 
@@ -98,7 +98,7 @@ const SeriesForm = () => {
                 ></input>
             </div>
             <div className="submit-button">
-                <button> Add Series </button>
+                <button> Upload </button>
             </div>
             {error && <div className="error"> {error} </div>}
         </form>

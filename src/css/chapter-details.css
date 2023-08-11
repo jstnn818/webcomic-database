@@ -1,0 +1,28 @@
+.chapter-details {
+    background: #252525;
+    border-radius: 4px;
+    border: 2px solid #353536;
+    position: relative;
+}
+.chapter-details h4 {
+    color: white;
+    margin: 5px 0 5px 10px;
+}
+.chapter-details p {
+    margin: 0 0 5px 10px;
+    font-size: 0.9em;
+    color: #9b9b9b;
+}
+.chapter-details span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    cursor: pointer;
+    background: #353536;
+    padding: 6px;
+    border-radius: 50%;
+}
+.chapter-details a {
+    text-decoration: none;
+}

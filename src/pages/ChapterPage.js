@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import PageDetails from '../components/PageDetails'
+import '../css/chapter-page.css'
 
 const ChapterPage = () => {
     const { chapterId } = useParams()
@@ -10,13 +11,6 @@ const ChapterPage = () => {
     const [ onePageView, setOnePageView ] = useState(true)  
 
     useEffect(() => {
-      /*const fetchSeriesOne = async () => {
-        const response = await fetch(`http://localhost:4000/api/series/${seriesId}`)
-        const json = await response.json()
-
-        setChapter(json.chapters.find((w) => w._id === chapterId))
-      }*/
-
       const fetchChapter = async () => {
         const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`)
         const json = await response.json()
@@ -61,19 +55,23 @@ const ChapterPage = () => {
 
     return (
       <div>
-        <div className="series-details">
-          {chapter.title}
+        <div className="chapter-info">
+          <div className='chapter-title'>
+            Chapter {chapter.number}: {chapter.title}
+          </div>
+          <div className='chapter-buttons'>
+            {onePageView && 
+              (<span className="material-symbols-outlined" onClick={prevPage}> arrow_back_ios </span>)}
+            <span className="material-symbols-outlined" onClick={switchPageView}> cameraswitch </span>
+            {onePageView && 
+              (<span className="material-symbols-outlined" onClick={nextPage}> arrow_forward_ios </span>)}
+          </div>
+          
         </div>
-        <button onClick={switchPageView}> SWITCH VIEW </button>
+        
         <div className="images">
           {pageRenderer()}
         </div>
-        {onePageView && (
-          <div>
-            <button onClick={prevPage}>PREV</button>
-            <button onClick={nextPage}>NEXT</button>
-          </div>
-        )}
       </div>
     )  
 }

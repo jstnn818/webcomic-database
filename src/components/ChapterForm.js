@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
+import '../css/form.css'
 
 const ChapterForm = (props) => {
     const { seriesOne } = props
@@ -85,35 +86,38 @@ const ChapterForm = (props) => {
 return (
     <form className="create" onSubmit={ handleSubmit } encType=''>
         <h3> Add a New Chapter </h3>
+        <div className="form-info">
+            <label> Title: </label>
+            <input
+                type="text"
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                className={emptyFields.includes('title') ? 'error' : ''}
+            ></input>
 
-        <label> Title: </label>
-        <input
-            type="text"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-            className={emptyFields.includes('title') ? 'error' : ''}
-        ></input>
+            <label> Number: </label>
+            <input
+                type="text"
+                onChange={(e) => setNumber(e.target.value)}
+                value={number}
+                className={emptyFields.includes('number') ? 'error' : ''}
+            ></input>
 
-        <label> Number: </label>
-        <input
-            type="text"
-            onChange={(e) => setNumber(e.target.value)}
-            value={number}
-            className={emptyFields.includes('number') ? 'error' : ''}
-        ></input>
-
-        <label> Pages: </label>
-        <input
-            type="file"
-            onChange={handlePageChange}
-            multiple
-            className={emptyFields.includes('pages') ? 'error' : ''}
-        ></input>
-
-        <button> Add Chapter </button>
+            <label> Pages: </label>
+            <input
+                id="form-upload"
+                type="file"
+                onChange={handlePageChange}
+                multiple
+                className={emptyFields.includes('pages') ? 'error' : ''}
+            ></input>
+        </div>
+        <div className="submit-button">
+            <button> Upload </button>
+        </div>
         {error && <div className="error"> {error} </div>}
     </form>
-)
+    )
 }
 
 export default ChapterForm

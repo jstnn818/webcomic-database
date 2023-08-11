@@ -1,0 +1,28 @@
+.chapter-info {
+    color: white;
+    margin: 10px auto;
+    background: #1c1c1c;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    padding: 10px 0 10px 0;
+}
+.chapter-title {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+.chapter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.chapter-buttons span {
+    user-select: none;
+    margin: 0 10px 0 10px;
+}
+.images {
+    display: block;
+}
+.page-details {
+    text-align: center;
+}
