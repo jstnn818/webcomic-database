@@ -32,6 +32,14 @@ const ChapterPage = () => {
         }
     }
 
+    const firstPage = () => {
+      setPageNumber(0)
+    }
+
+    const lastPage = () => {
+      setPageNumber(pages.length - 1)
+    }
+
     const switchPageView = () => {
         setPageNumber(0)
         setOnePageView(!onePageView)
@@ -40,11 +48,21 @@ const ChapterPage = () => {
     const pageRenderer = () => {
       if (onePageView) {
         const singlePicture = pages[pageNumber]
-        return <PageDetails pageId={singlePicture}></PageDetails>
+        return (
+          <div className='page-container'>
+            <PageDetails pageId={singlePicture}></PageDetails>
+            <button class="page-left" onClick={prevPage}></button>
+            <button class="page-right" onClick={nextPage}></button>
+          </div>
+        )
       }
       else {
         return pages.map((singlePicture) => {
-          return <PageDetails pageId={singlePicture}></PageDetails>
+          return (
+            <div className='page-container'>
+              <PageDetails pageId={singlePicture}></PageDetails>
+            </div>  
+          )
         })
       }
     }
@@ -61,14 +79,20 @@ const ChapterPage = () => {
           </div>
           <div className='chapter-buttons'>
             {onePageView && 
-              (<span className="material-symbols-outlined" onClick={prevPage}> arrow_back_ios </span>)}
+              (<>
+                <span className="material-symbols-outlined" onClick={firstPage}> keyboard_double_arrow_left </span>
+                <span className="material-symbols-outlined" onClick={prevPage}> keyboard_arrow_left </span>
+              </>
+              )}
             <span className="material-symbols-outlined" onClick={switchPageView}> cameraswitch </span>
             {onePageView && 
-              (<span className="material-symbols-outlined" onClick={nextPage}> arrow_forward_ios </span>)}
+              (<>
+                <span className="material-symbols-outlined" onClick={nextPage}> keyboard_arrow_right </span>
+                <span className="material-symbols-outlined" onClick={lastPage}> keyboard_double_arrow_right </span>
+              </>
+              )}
           </div>
-          
         </div>
-        
         <div className="images">
           {pageRenderer()}
         </div>

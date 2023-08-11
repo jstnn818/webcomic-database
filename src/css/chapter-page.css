@@ -26,3 +26,23 @@
 .page-details {
     text-align: center;
 }
+.page-container {
+    position: relative;
+}
+.page-right, .page-left {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.page-left {
+    left: 0;
+}
+  
+.page-right {
+    right: 0;
+}
