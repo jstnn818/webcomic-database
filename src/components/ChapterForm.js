@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useSeriesContext } from '../hooks/useSeriesContext'
 import '../css/form.css'
 
 const ChapterForm = (props) => {
@@ -9,8 +8,6 @@ const ChapterForm = (props) => {
     const [images, setImages] = useState([]);
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
-  
-    const { dispatch } = useSeriesContext()
     
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -68,8 +65,9 @@ const ChapterForm = (props) => {
                   body: JSON.stringify(updatedSeries)
                 })
                 const jsonSeries = await responseSeries.json()
+                console.log(jsonSeries)
                 if (responseSeries.ok) {
-                    dispatch({type: 'UPDATE_SERIES', payload: jsonSeries})
+                    window.location.reload()
                 }
             }
 

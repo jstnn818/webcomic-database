@@ -51,8 +51,8 @@ const ChapterPage = () => {
         return (
           <div className='page-container'>
             <PageDetails pageId={singlePicture}></PageDetails>
-            <button class="page-left" onClick={prevPage}></button>
-            <button class="page-right" onClick={nextPage}></button>
+            <button className="page-left" onClick={prevPage}></button>
+            <button className="page-right" onClick={nextPage}></button>
           </div>
         )
       }

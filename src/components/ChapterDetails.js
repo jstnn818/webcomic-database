@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { useSeriesContext } from '../hooks/useSeriesContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import '../css/chapter-details.css'
 
 const ChapterDetails = ({ chapterId, seriesOne }) => {
 
-    const { dispatch } = useSeriesContext()
     const [ chapter, setChapter ] = useState(null)
 
     useEffect(() => {
@@ -30,33 +28,27 @@ const ChapterDetails = ({ chapterId, seriesOne }) => {
             },
             body: JSON.stringify(updatedSeries)
         })
-        const jsonSeries = await responseSeries.json()
         if (responseSeries.ok) {
-            dispatch({type: 'UPDATE_SERIES', payload: jsonSeries})
-        }
-
-        const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`, {
-            method: 'DELETE'
-        })
-        const json = await response.json()
-        if (response.ok) {
-            console.log('chapter deleted', json)
+            const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`, {
+                method: 'DELETE'
+            })
+            const json = await response.json()
+            if (response.ok) {
+                console.log('chapter deleted', json)
+                window.location.reload()
+            }
         }
     }
-
     if (!chapter) {
         return <div></div>
     }
-
     return (
         <div className="chapter-details">
             <Link to={`/series/${seriesOne._id}/${chapterId}`}>
-                <h4> 
-                    Chapter {chapter.number}: {chapter.title} 
-                </h4>
+                <h4> Chapter {chapter.number}: {chapter.title} </h4>
             </Link>
-            <p>{formatDistanceToNow(new Date(chapter.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
+            <p>{formatDistanceToNow(new Date(chapter.createdAt), { addSuffix: true })}</p>
         </div>
     )
 }

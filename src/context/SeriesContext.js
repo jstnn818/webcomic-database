@@ -17,14 +17,9 @@ export const seriesReducer = (state, action) => {
           series: state.series.filter((w) => w._id !== action.payload._id)
         }
       case 'UPDATE_SERIES':
-        const { seriesId, newChapterId } = action.payload
-        const updatedSeries = state.series.map(seriesOne => {
-          if (seriesOne.id === seriesId) {
-            return {...seriesOne, chapters: [newChapterId, ...seriesOne.chapters]}
-          }
-          return seriesOne
-        })
-        return updatedSeries
+        return {
+          series: state.series.map(w => w._id === action.payload._id ? action.payload : w)
+        }
       default:
         return state
     }

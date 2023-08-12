@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-//import { useSeriesContext } from '../hooks/useSeriesContext'
+
 import ChapterForm from '../components/ChapterForm'
 import ChapterDetails from '../components/ChapterDetails'
 import '../css/series-page.css'
@@ -16,6 +16,7 @@ const SeriesPage = () => {
         const response = await fetch(`http://localhost:4000/api/series/${seriesId}`)
         const json = await response.json()
         setSeriesOne(json)
+
         const coverRes = await fetch(`http://localhost:4000/api/images/${json.cover}`)
         const coverJson = await coverRes.json()
         setCover(coverJson)
@@ -37,7 +38,7 @@ const SeriesPage = () => {
       }, ''))
       return <img alt="cover" src={`data:image/png;base64,${base64String}`} width="200" height="300"/>
     }
-
+    //seriesOne={seriesOne}
     return (
       <div className="home">
         <div className="series-container">
