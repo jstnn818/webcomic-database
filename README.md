@@ -1,6 +1,7 @@
 # Comic Hub
 
 Web-App designed for users to upload and read fanmade comics. Made in with MERN-Stack, using JavaScript in Frontend and Backend.
+Web-App designed for users to upload and read fanmade comics. Made in with MERN-Stack, using JavaScript in Frontend and Backend.
 
 ## Available Scripts
 
