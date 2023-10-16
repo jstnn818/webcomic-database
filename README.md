@@ -1,7 +1,6 @@
 # Comic Hub
 
 Web-App designed for users to upload and read fanmade comics. Made in with MERN-Stack, using JavaScript in Frontend and Backend.
-Web-App designed for users to upload and read fanmade comics. Made in with MERN-Stack, using JavaScript in Frontend and Backend.
 
 ## Available Scripts
 
@@ -14,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.
 
-## `nodemon server.js` in BACKEND
+### `nodemon server.js` in BACKEND
 
 Runs the backend of the server. Users must connect their own backend, creating an '.env',
 in the format of...
@@ -22,7 +21,7 @@ in the format of...
 PORT=[port_number] \
 DB_USER=[db_username] \
 DB_PASSWORD=[db_password] \
-DB_HOST=[db_host] \
+DB_HOST=[db_host] 
 
 ## Home Page
 
