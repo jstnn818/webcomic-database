@@ -41,4 +41,5 @@
 #reorder {
     float: right;
     margin-right: 17px;
+    user-select: none;
 }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import '../css/form.css'
 
 const ChapterForm = (props) => {
-    const { seriesOne } = props
+    const { singleSeries } = props
     const [title, setTitle] = useState('')
     const [images, setImages] = useState([])
     const [error, setError] = useState(null)
@@ -53,9 +53,9 @@ const ChapterForm = (props) => {
                 console.log('new chapter added', json)
       
                 const updatedSeries = {
-                    chapters: seriesOne.chapters ? [...seriesOne.chapters, json._id] : [json._id]
+                    chapters: singleSeries.chapters ? [...singleSeries.chapters, json._id] : [json._id]
                 }
-                const responseSeries = await fetch(`http://localhost:4000/api/series/${seriesOne._id}`, {
+                const responseSeries = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
                   method: 'PATCH',
                   headers: {
                       'Content-Type': 'application/json'

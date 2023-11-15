@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import '../css/chapter-details.css'
 
-const ChapterDetails = ({ chapterId, seriesOne, index }) => {
+const ChapterDetails = ({ chapterId, singleSeries, index }) => {
 
     const [ chapter, setChapter ] = useState(null)
 
@@ -19,9 +19,9 @@ const ChapterDetails = ({ chapterId, seriesOne, index }) => {
     const handleClick = async () => {
 
         const updatedSeries = {
-            chapters: seriesOne.chapters.filter((w) => w !== chapterId)
+            chapters: singleSeries.chapters.filter((w) => w !== chapterId)
         }
-        const responseSeries = await fetch(`http://localhost:4000/api/series/${seriesOne._id}`, {
+        const responseSeries = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,12 +44,12 @@ const ChapterDetails = ({ chapterId, seriesOne, index }) => {
     }
 
     const chapterData = {
-        chapters: seriesOne.chapters,
+        chapters: singleSeries.chapters,
         index: index
     }
     return (
         <div className="chapter-details">
-            <Link to={{pathname: `/series/${seriesOne._id}/${index + 1}`}} state= { chapterData }>
+            <Link to={{pathname: `/series/${singleSeries._id}/${index + 1}`}} state= { chapterData }>
                 <h4> Chapter {index + 1}: {chapter.title} </h4>
             </Link>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>

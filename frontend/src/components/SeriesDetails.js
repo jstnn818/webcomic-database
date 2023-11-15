@@ -6,22 +6,22 @@ import '../css/series-details.css'
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const SeriesDetails = ({ seriesOne }) => {
+const SeriesDetails = ({ singleSeries }) => {
 
     const { dispatch } = useSeriesContext()
     const [ cover, setCover ] = useState(null)
 
     useEffect(() => {
         const fetchCover = async () => {
-            const response = await fetch(`http://localhost:4000/api/images/${seriesOne.cover}`)
+            const response = await fetch(`http://localhost:4000/api/images/${singleSeries.cover}`)
             const json = await response.json()
             setCover(json)
           }
           fetchCover()
-    }, [seriesOne])
+    }, [singleSeries])
 
     const handleClick = async () => {
-        const response = await fetch(`http://localhost:4000/api/series/${seriesOne._id}`, {
+        const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
             method: 'DELETE'
         })
         const json = await response.json()
@@ -43,18 +43,18 @@ const SeriesDetails = ({ seriesOne }) => {
 
     return (
         <div className="series-details">
-            <Link to={'/series/' + seriesOne._id} style={{ textDecoration: 'none' }}>
-                <h4> {seriesOne.title} </h4>
+            <Link to={'/series/' + singleSeries._id} style={{ textDecoration: 'none' }}>
+                <h4> {singleSeries.title} </h4>
             </Link>
             <div className="series-description">
                 <div className="series-image-details">
                     {imageConverter()}
                 </div>
                 <div className="description"> 
-                    <p><strong> {seriesOne.author} </strong></p>
+                    <p><strong> {singleSeries.author} </strong></p>
                 </div>
             </div>
-            <p className='create-date'>{formatDistanceToNow(new Date(seriesOne.createdAt), { addSuffix: true })}</p>
+            <p className='create-date'>{formatDistanceToNow(new Date(singleSeries.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
         </div>
     )
