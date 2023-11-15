@@ -1,16 +1,33 @@
-.chapter-info {
+#chapter-info {
+    display: flex;
+    justify-content: center;
+    min-height: 40px;
+}
+#chapter-button-container {
     color: white;
     margin: 10px auto;
     background: #1c1c1c;
     border-radius: 4px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-    padding: 10px 0 10px 0;
+    padding: 2px 0 10px 0;
+    width: 50%;
 }
-.chapter-title {
+#chapter-title {
+    color: white;
     text-decoration: none;
     display: flex;
     justify-content: center;
-    min-height: 25px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 10px 0px;
+}
+.chapter-info-button {
+    margin: 0 5px;
+    display: inline-block;
+    color: white;
+    background: #1c1c1c;
+    padding: 5px 15px;
+    vertical-align: middle;
 }
 .chapter-buttons {
     display: flex;
@@ -19,7 +36,7 @@
 }
 .chapter-buttons span {
     user-select: none;
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
 }
 .images {
     display: block;

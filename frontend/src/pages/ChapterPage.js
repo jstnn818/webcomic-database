@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useLocation, useNavigate  } from 'react-router-dom'
+import { useParams, useLocation, useNavigate, Link  } from 'react-router-dom'
 import PageDetails from '../components/PageDetails'
 import '../css/chapter-page.css'
 
@@ -8,21 +8,20 @@ const ChapterPage = () => {
     const navigate = useNavigate()
 
     const { seriesId } = useParams()
-    const { chapters, index } = location.state
-    const [ pages, setPages ] = useState([])
+    const { seriesTitle, chapters, chapterIndex } = location.state
     const [ chapter, setChapter ] = useState(null)
+
     const [ pageNumber, setPageNumber ] = useState(0)
     const [ onePageView, setOnePageView ] = useState(true)
-    const [loading, setLoading] = useState(true)
+    const [ loading, setLoading ] = useState(true)
 
     useEffect(() => {
       const fetchChapter = async () => {
         setLoading(true)
         try {
-          const response = await fetch(`http://localhost:4000/api/chapters/${chapters[index]}`)
+          const response = await fetch(`http://localhost:4000/api/chapters/${chapters[chapterIndex]}`)
           const json = await response.json()
           setChapter(json)
-          setPages(json.pages)
         }
         finally {
           setPageNumber(0)
@@ -30,32 +29,39 @@ const ChapterPage = () => {
         }
       }
       fetchChapter()
-    }, [chapters, index])
+    }, [chapters, chapterIndex])
 
     const prevPage = () => {
-      if (pageNumber > 0) {
+      if (onePageView && pageNumber > 0) {
         setPageNumber(pageNumber - 1)
       }
-      else if (index > 0) {
-        goToChapter(index - 1)
+      else if (chapterIndex > 0) {
+        goToChapter(chapterIndex - 1)
+      }
+      else {
+        navigate(`/series/${seriesId}`)
       }
     }
 
     const nextPage = () => {
-      if (pageNumber < pages.length - 1) {
+      if (onePageView && pageNumber < chapter.pages.length - 1) {
         setPageNumber(pageNumber + 1)
       }
-      else if (index < chapters.length - 1) {
-        goToChapter(index + 1)
+      else if (chapterIndex < chapters.length - 1) {
+        goToChapter(chapterIndex + 1)
+      }
+      else {
+        navigate(`/series/${seriesId}`)
       }
     }
 
-    const goToChapter = (index) => {
+    const goToChapter = (chapterIndex) => {
       const chapterData = {
+          seriesTitle: seriesTitle,
           chapters: chapters,
-          index: index 
+          chapterIndex: chapterIndex 
       }
-      navigate(`/series/${seriesId}/${index + 1}`, { state: chapterData })
+      navigate(`/series/${seriesId}/${chapterIndex + 1}`, { state: chapterData })
     }
     
     const firstPage = () => {
@@ -63,7 +69,7 @@ const ChapterPage = () => {
     }
 
     const lastPage = () => {
-      setPageNumber(pages.length - 1)
+      setPageNumber(chapter.pages.length - 1)
     }
 
     const switchPageView = () => {
@@ -73,7 +79,7 @@ const ChapterPage = () => {
 
     const pageRenderer = () => {
       if (onePageView) {
-        const singlePicture = pages[pageNumber]
+        const singlePicture = chapter.pages[pageNumber]
         return (
           <div className='page-container'>
             <PageDetails pageId={singlePicture}></PageDetails>
@@ -83,25 +89,34 @@ const ChapterPage = () => {
         )
       }
       else {
-        return pages.map((singlePicture) => {
+        return chapter.pages.map((singlePicture) => {
           return (
             <div className='page-container'>
               <PageDetails pageId={singlePicture}></PageDetails>
+              <button className="page-left" onClick={prevPage}></button>
+              <button className="page-right" onClick={nextPage}></button>
             </div>  
           )
         })
       }
     }
-
-    if (!chapter || pages.length === 0) {
+    if (!chapter || chapter.pages.length === 0) {
       return <div> </div>
     }
     return (
       <div>
-        <div className="chapter-info">
-          <div className='chapter-title'>
-            {loading  ? '' : `Chapter ${index + 1}: ${chapter.title}`}
-          </div>
+        <Link id='chapter-title' to={'/series/' + seriesId}> {seriesTitle} </Link>
+        <div id='chapter-info'>
+          {loading ? '' : (
+              <div>
+                <div class="chapter-info-button"> Ch. {chapterIndex + 1} : {chapter.title} </div>
+                {!onePageView ? '' : (
+                  <div class="chapter-info-button"> Pg. {pageNumber + 1} / {chapter.pages.length} </div>
+                )}
+              </div>
+          )}
+        </div>
+        <div id="chapter-button-container">
           <div className='chapter-buttons'>
             {onePageView && 
               (<>

@@ -44,8 +44,9 @@ const ChapterDetails = ({ chapterId, singleSeries, index }) => {
     }
 
     const chapterData = {
+        seriesTitle: singleSeries.title,
         chapters: singleSeries.chapters,
-        index: index
+        chapterIndex: index
     }
     return (
         <div className="chapter-details">
