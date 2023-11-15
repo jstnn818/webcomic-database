@@ -26,7 +26,7 @@ const getOneSeries = async (req, res) => {
 
 //create a series
 const createSeries = async (req, res) => {
-    const {title, author, cover, chapters} = req.body
+    const {title, author, cover} = req.body
     let emptyFields = []
 
     if (!title) {
@@ -34,9 +34,6 @@ const createSeries = async (req, res) => {
     }
     if (!author) {
         emptyFields.push('author')
-    }
-    if (!chapters) {
-        emptyFields.push('chapters')
     }
     if (!cover) {
         emptyFields.push('cover')
@@ -47,7 +44,7 @@ const createSeries = async (req, res) => {
 
     // add doc to db
     try {
-        const series = await Series.create({title, author, chapters, cover})
+        const series = await Series.create({title, author, cover})
         res.status(200).json(series)
     } catch (error) {
         res.status(400).json({error: error.message})

@@ -1,11 +1,7 @@
 import { useState } from 'react'
-import { useSeriesContext } from '../hooks/useSeriesContext'
 import '../css/form.css'
 
-// Forms don't reset. value="" kinda works, but doesn't show when you have a file there either
-
 const SeriesForm = () => {
-    const { dispatch } = useSeriesContext()
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
@@ -62,7 +58,7 @@ const SeriesForm = () => {
                 setError(null)
                 setEmptyFields([])
                 console.log('new series added', json)
-                dispatch({type: 'CREATE_SERIES', payload: json})
+                window.location.reload()
             }
         } catch (error) {
             console.error('Error uploading images:', error)

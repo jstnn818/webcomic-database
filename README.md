@@ -28,7 +28,7 @@ DB_HOST=[db_host]
 The Home Page will contain two modules.
 - A grid, listing all uploaded Comic Series, serving as both a preview and a link to the
 respective Comic Series.
-- An 'Add a New Series' module, allowing users to add their own Comic Series (NOTE: there exists a persisting issue where, after upload, the module will claim an image is still uploaded. This is not the case.)
+- An 'Add a New Series' module, allowing users to add their own Comic Series
 
 ![Home Page Preview](https://github.com/jstnn818/comic-hub/blob/main/readme-images/home_page.png?raw=true)
 
