@@ -10,6 +10,7 @@
     text-decoration: none;
     display: flex;
     justify-content: center;
+    min-height: 25px;
 }
 .chapter-buttons {
     display: flex;
