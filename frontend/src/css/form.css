@@ -1,10 +1,18 @@
 form {
     background: #1c1c1c;
     border-radius: 4px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-    width: 300px;
+    box-shadow: 2px 2px 5px #0000000d;
+    width: 300px;  
+}
+
+#series-form {
     height: 370px;
 }
+
+#chapter-form {
+    height: 285px;
+}
+
 .form-info {
     background: #252525;
     padding: 5px 0 5px 0;

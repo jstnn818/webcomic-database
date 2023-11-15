@@ -24,14 +24,11 @@ const getChapter = async (req, res) => {
 
 //create a chapter
 const createChapter = async (req, res) => {
-    const {title, number, pages} = req.body
+    const {title, pages} = req.body
     let emptyFields = []
 
     if (!title) {
         emptyFields.push('title')
-    }
-    if (!number) {
-        emptyFields.push('number')
     }
     if (!pages || pages.length === 0) {
         emptyFields.push('pages')
@@ -42,7 +39,7 @@ const createChapter = async (req, res) => {
 
     // add doc to db
     try {
-        const chapter = await Chapter.create({title, number, pages})
+        const chapter = await Chapter.create({title, pages})
         res.status(200).json(chapter)
     } catch (error) {
         res.status(400).json({error: error.message})

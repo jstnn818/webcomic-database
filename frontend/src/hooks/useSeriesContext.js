@@ -1,4 +1,4 @@
-import { SeriesContext } from "../context/SeriesContext";
+import { SeriesContext } from "../context/SeriesContext"
 import { useContext } from 'react'
 
 export const useSeriesContext = () => {

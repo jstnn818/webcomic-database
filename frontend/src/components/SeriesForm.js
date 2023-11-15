@@ -70,7 +70,7 @@ const SeriesForm = () => {
     }
 
     return (
-        <form className="create" onSubmit={ handleSubmit } encType=''>
+        <form className="create" id="series-form" onSubmit={ handleSubmit } encType=''>
             <h3> Add a New Series </h3>
             <div className="form-info">
                 <label> Title: </label>

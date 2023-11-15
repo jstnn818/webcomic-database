@@ -4,8 +4,7 @@ import '../css/form.css'
 const ChapterForm = (props) => {
     const { seriesOne } = props
     const [title, setTitle] = useState('')
-    const [number, setNumber] = useState('')
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState([])
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
     
@@ -15,14 +14,14 @@ const ChapterForm = (props) => {
         const pages = []
 
         const uploadPromises = images.map(async (image, index) => {
-            const page = new FormData();
-            page.append('name', `image${index}`);
-            page.append('testImage', image);
+            const page = new FormData()
+            page.append('name', `image${index}`)
+            page.append('testImage', image)
         
             const response = await fetch('http://localhost:4000/api/images', {
                 method: 'POST',
                 body: page,
-            });
+            })
         
             const json = await response.json()
             return json
@@ -32,7 +31,7 @@ const ChapterForm = (props) => {
             const uploadedPages = await Promise.all(uploadPromises)
             pages.push(...uploadedPages)
             console.log(pages)
-            const chapter = { title, number, pages }
+            const chapter = { title, pages }
             const response = await fetch('http://localhost:4000/api/chapters', {
                 method: 'POST',
                 body: JSON.stringify(chapter),
@@ -48,7 +47,6 @@ const ChapterForm = (props) => {
             }
             if (response.ok) {
                 setTitle('')
-                setNumber('')
                 setImages([])
                 setError(null)
                 setEmptyFields([])
@@ -77,12 +75,12 @@ const ChapterForm = (props) => {
     }
 
     const handlePageChange = (e) => {
-        const selectedImages = Array.from(e.target.files);
-        setImages(selectedImages);
+        const selectedImages = Array.from(e.target.files)
+        setImages(selectedImages)
     }
 
 return (
-    <form className="create" onSubmit={ handleSubmit } encType=''>
+    <form className="create" id="chapter-form" onSubmit={ handleSubmit } encType=''>
         <h3> Add a New Chapter </h3>
         <div className="form-info">
             <label> Title: </label>
@@ -92,15 +90,6 @@ return (
                 value={title}
                 className={emptyFields.includes('title') ? 'error' : ''}
             ></input>
-
-            <label> Number: </label>
-            <input
-                type="text"
-                onChange={(e) => setNumber(e.target.value)}
-                value={number}
-                className={emptyFields.includes('number') ? 'error' : ''}
-            ></input>
-
             <label> Pages: </label>
             <input
                 id="form-upload"

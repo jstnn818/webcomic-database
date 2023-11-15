@@ -8,10 +8,6 @@ const chapterSchema = new Schema({
         type: String,
         required: true
     },
-    number: {
-        type: String,
-        required: true
-    },
     pages: [String] //Image.schema
 }, { timestamps: true })
 

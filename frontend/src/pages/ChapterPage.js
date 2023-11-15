@@ -76,7 +76,7 @@ const ChapterPage = () => {
       <div>
         <div className="chapter-info">
           <div className='chapter-title'>
-            Chapter {chapter.number}: {chapter.title}
+            Chapter {index + 1}: {chapter.title}
           </div>
           <div className='chapter-buttons'>
             {onePageView && 
