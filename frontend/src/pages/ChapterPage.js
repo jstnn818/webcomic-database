@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import PageDetails from '../components/PageDetails'
 import '../css/chapter-page.css'
 
 const ChapterPage = () => {
-    const { chapterId } = useParams()
+    const location = useLocation()
+    const { chapters, index } = location.state
     const [ pages, setPages ] = useState([])
     const [ chapter, setChapter ] = useState(null)
     const [ pageNumber, setPageNumber ] = useState(0)
-    const [ onePageView, setOnePageView ] = useState(true)  
+    const [ onePageView, setOnePageView ] = useState(true)
 
     useEffect(() => {
       const fetchChapter = async () => {
-        const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`)
+        const response = await fetch(`http://localhost:4000/api/chapters/${chapters[index]}`)
         const json = await response.json()
         setChapter(json)
         setPages(json.pages)
       }
       fetchChapter()
-    }, [chapterId])
+    }, [chapters, index])
 
     const prevPage = () => {
         if (pageNumber > 0) {

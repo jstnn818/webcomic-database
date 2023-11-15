@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import '../css/chapter-details.css'
 
-const ChapterDetails = ({ chapterId, seriesOne }) => {
+const ChapterDetails = ({ chapterId, seriesOne, index }) => {
 
     const [ chapter, setChapter ] = useState(null)
 
@@ -42,10 +42,15 @@ const ChapterDetails = ({ chapterId, seriesOne }) => {
     if (!chapter) {
         return <div></div>
     }
+
+    const chapterData = {
+        chapters: seriesOne.chapters,
+        index: index
+    }
     return (
         <div className="chapter-details">
-            <Link to={`/series/${seriesOne._id}/${chapterId}`}>
-                <h4> Chapter {chapter.number}: {chapter.title} </h4>
+            <Link to={{pathname: `/series/${seriesOne._id}/${index + 1}`}} state= { chapterData }>
+                <h4> Chapter {index + 1}: {chapter.title} </h4>
             </Link>
             <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
             <p>{formatDistanceToNow(new Date(chapter.createdAt), { addSuffix: true })}</p>

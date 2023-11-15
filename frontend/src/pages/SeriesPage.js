@@ -58,8 +58,13 @@ const SeriesPage = () => {
           <div className="chapters">
             <div className='chapter-header'><h4> Chapters </h4></div>
             <div className='chapter-rows'>
-              {seriesOne.chapters && seriesOne.chapters.map(chapterId => (
-                <ChapterDetails seriesOne={seriesOne} key={chapterId} chapterId={chapterId}/>
+              {seriesOne.chapters && seriesOne.chapters.map((chapterId, index) => (
+                <ChapterDetails 
+                seriesOne={seriesOne} 
+                key={chapterId} 
+                chapterId={chapterId}
+                index={index}
+                />
               ))}
             </div>
           </div>
