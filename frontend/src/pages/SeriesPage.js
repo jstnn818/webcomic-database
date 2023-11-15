@@ -10,6 +10,10 @@ const SeriesPage = () => {
   const { seriesId } = useParams()
   const [ seriesOne, setSeriesOne ] = useState(null)
   const [ cover, setCover ] = useState(null)
+  const [ order, setOrder ] = useState({
+    ascending: true,
+    icon: "arrow_downward"
+  })
     
   useEffect(() => {
       const fetchSeriesOne = async () => {
@@ -38,7 +42,38 @@ const SeriesPage = () => {
       }, ''))
       return <img alt="cover" src={`data:image/png;base64,${base64String}`} width="200" height="300"/>
     }
-    //seriesOne={seriesOne}
+
+    const switchChapterOrder = () => {
+      setOrder({
+        ascending: !order.ascending,
+        icon: order.ascending ? "arrow_upward" : "arrow_downward"
+      })
+    }
+
+    const chapterListRenderer = () => {
+      if (order.ascending) {
+        return seriesOne.chapters && seriesOne.chapters.map((chapterId, index) => (
+          <ChapterDetails 
+          seriesOne={seriesOne} 
+          key={chapterId} 
+          chapterId={chapterId}
+          index={index}
+          />
+        ))
+      }
+      else {
+        return seriesOne.chapters && seriesOne.chapters.toReversed().map((chapterId, index) => (
+          <ChapterDetails 
+          seriesOne={seriesOne} 
+          key={chapterId} 
+          chapterId={chapterId}
+          index={seriesOne.chapters.length - index - 1}
+          />
+        ))
+      }
+    }
+
+
     return (
       <div className="home">
         <div className="series-container">
@@ -54,18 +89,14 @@ const SeriesPage = () => {
               <p><strong> Description: </strong> ... </p>
             </div>
           </div>
-          
           <div className="chapters">
-            <div className='chapter-header'><h4> Chapters </h4></div>
+            <div className='chapter-header'><h4> 
+                Chapters 
+                <span id="reorder" className="material-symbols-outlined" 
+                onClick={switchChapterOrder}> {order.icon} </span>
+            </h4></div>
             <div className='chapter-rows'>
-              {seriesOne.chapters && seriesOne.chapters.map((chapterId, index) => (
-                <ChapterDetails 
-                seriesOne={seriesOne} 
-                key={chapterId} 
-                chapterId={chapterId}
-                index={index}
-                />
-              ))}
+              {chapterListRenderer()}
             </div>
           </div>
         </div>

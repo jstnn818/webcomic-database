@@ -37,3 +37,8 @@
     text-align: center;
     margin: 0;
 }
+
+#reorder {
+    float: right;
+    margin-right: 17px;
+}
