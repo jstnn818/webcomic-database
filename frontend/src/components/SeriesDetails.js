@@ -41,10 +41,17 @@ const SeriesDetails = ({ singleSeries }) => {
         return <img alt="cover" src={`data:image/png;base64,${base64String}`} width="150" height="235"/>
     }
 
+    const seriesTitleRender = () => {
+        if (singleSeries.title.length > 18){
+            return singleSeries.title.slice(0, 16) + "..."
+        }
+        return singleSeries.title
+    }
+
     return (
         <div className="series-details">
             <Link to={'/series/' + singleSeries._id} style={{ textDecoration: 'none' }}>
-                <h4> {singleSeries.title} </h4>
+                <h4> {seriesTitleRender()} </h4>
             </Link>
             <div className="series-description">
                 <div className="series-image-details">
