@@ -36,8 +36,8 @@ header a {
 /* homepage */
 .home {
   display: grid;
-  grid-template-columns: 4fr 1fr;
-  gap: 50px;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
 }
 .series {
   display: grid;
@@ -57,4 +57,27 @@ header a {
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
 
-/* new series form */
+.material-symbols-outlined {
+  user-select: none;
+}
+
+.edit-button {
+  font-size: 20px;
+  color: white;
+  height: 30px;
+  background: #252525;
+  padding: 5px 15px;
+  border-radius: 4px;
+  width: 270px;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+
+.edit-button:hover {
+  background: #444444;
+}
+
+.side-column {
+  min-width: 20px;
+}

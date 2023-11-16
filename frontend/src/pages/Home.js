@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
 
 //components
@@ -7,6 +7,7 @@ import SeriesForm from '../components/SeriesForm'
 
 const Home = () => {
     const { series, dispatch } = useSeriesContext()
+    const [ editMode, setEditMode ] = useState(false)
   
     useEffect(() => {
         const fetchSeries = async () => {
@@ -20,14 +21,24 @@ const Home = () => {
         fetchSeries()
     }, [dispatch])
 
+    const switchEditMode = () => {
+      setEditMode(!editMode)
+    }
+
     return (
         <div className="home">
           <div className="series">
             {series && series.map(singleSeries => (
-              <SeriesDetails singleSeries={singleSeries} key={singleSeries._id} />
+              <SeriesDetails singleSeries={singleSeries} key={singleSeries._id} editMode={editMode}/>
             ))}
           </div>
-          <SeriesForm />
+            <div className="side-column">
+            <div className="edit-button" onClick={switchEditMode}> 
+              <strong> {!editMode ? 'Edit' : 'Done'} </strong> 
+              <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'done'} </span>
+            </div>
+            {!editMode ? '' : (<SeriesForm />)}
+          </div>
         </div>
     )
 }

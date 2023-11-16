@@ -14,6 +14,7 @@ const SeriesPage = () => {
     ascending: true,
     icon: "arrow_downward"
   })
+  const [ editMode, setEditMode ] = useState(false)
     
   useEffect(() => {
       const fetchSingleSeries = async () => {
@@ -31,6 +32,10 @@ const SeriesPage = () => {
     
     if (!singleSeries) {
       return <div> </div>
+    }
+
+    const switchEditMode = () => {
+      setEditMode(!editMode)
     }
 
     const imageConverter = () => {
@@ -58,6 +63,7 @@ const SeriesPage = () => {
           key={chapterId} 
           chapterId={chapterId}
           index={index}
+          editMode={editMode}
           />
         ))
       }
@@ -68,6 +74,7 @@ const SeriesPage = () => {
           key={chapterId} 
           chapterId={chapterId}
           index={singleSeries.chapters.length - index - 1}
+          editMode={editMode}
           />
         ))
       }
@@ -100,7 +107,14 @@ const SeriesPage = () => {
             </div>
           </div>
         </div>
-        <ChapterForm singleSeries={singleSeries} />
+        <div className="side-column">
+          <div className="edit-button" onClick={switchEditMode}> 
+            <strong> {!editMode ? 'Edit' : 'Done'} </strong> 
+            <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'done'} </span>
+          </div>
+          {!editMode ? '' : (<ChapterForm singleSeries={singleSeries} />)}
+        </div>
+        
       </div>
     )  
 }

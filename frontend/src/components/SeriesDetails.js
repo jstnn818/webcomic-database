@@ -6,7 +6,7 @@ import '../css/series-details.css'
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const SeriesDetails = ({ singleSeries }) => {
+const SeriesDetails = ({ singleSeries, editMode }) => {
 
     const { dispatch } = useSeriesContext()
     const [ cover, setCover ] = useState(null)
@@ -62,7 +62,9 @@ const SeriesDetails = ({ singleSeries }) => {
                 </div>
             </div>
             <p className='create-date'>{formatDistanceToNow(new Date(singleSeries.createdAt), { addSuffix: true })}</p>
-            <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
+            {!editMode ? '' : (
+                <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
+            )}
         </div>
     )
 }

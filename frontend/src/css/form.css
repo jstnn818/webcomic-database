@@ -21,11 +21,13 @@ form {
     padding: 0;
     color: white;
 }
-h3{
+#series-form h3, #chapter-form h3 {
     color: white;
     display: flex;
     justify-content: center;
+    padding-top: 15px;
 }
+
 label {
     margin: 0 0 0 10px;
     display: block;
