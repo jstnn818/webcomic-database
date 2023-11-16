@@ -81,3 +81,6 @@ header a {
 .side-column {
   min-width: 20px;
 }
+.side-column-box {
+  background:#353536
+}

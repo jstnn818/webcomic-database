@@ -3,6 +3,7 @@ import { useSeriesContext } from '../hooks/useSeriesContext'
 
 //components
 import SeriesDetails from '../components/SeriesDetails'
+import FeaturedSection from '../components/FeaturedSection'
 import SeriesForm from '../components/SeriesForm'
 
 const Home = () => {
@@ -25,6 +26,10 @@ const Home = () => {
       setEditMode(!editMode)
     }
 
+    if (!series) {
+      return <div> </div>
+    }
+
     return (
         <div className="home">
           <div className="series">
@@ -33,11 +38,16 @@ const Home = () => {
             ))}
           </div>
             <div className="side-column">
-            <div className="edit-button" onClick={switchEditMode}> 
-              <strong> {!editMode ? 'Edit' : 'Back'} </strong> 
-              <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'exit_to_app'} </span>
-            </div>
-            {!editMode ? '' : (<SeriesForm />)}
+              <div className="edit-button" onClick={switchEditMode}> 
+                <strong> {!editMode ? 'Edit' : 'Back'} </strong> 
+                <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'exit_to_app'} </span>
+              </div>
+              
+              {!editMode ? '' : (<SeriesForm />)}
+              <div className="side-column-box">
+                <FeaturedSection series={series} />
+              </div>
+              
           </div>
         </div>
     )

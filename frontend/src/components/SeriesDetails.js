@@ -58,13 +58,14 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
                     {imageConverter()}
                 </div>
                 <div className="description"> 
-                    <p><strong> {singleSeries.author} </strong></p>
+                    <p><strong> Author: </strong> {singleSeries.author} </p>
                 </div>
             </div>
             <p className='create-date'>{formatDistanceToNow(new Date(singleSeries.createdAt), { addSuffix: true })}</p>
             {!editMode ? '' : (
                 <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
             )}
+            
         </div>
     )
 }

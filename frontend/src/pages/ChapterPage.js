@@ -109,9 +109,9 @@ const ChapterPage = () => {
         <div id='chapter-info'>
           {loading ? '' : (
               <div>
-                <div class="chapter-info-button"> Ch. {chapterIndex + 1} : {chapter.title} </div>
+                <div className="chapter-info-button"> Ch. {chapterIndex + 1} : {chapter.title} </div>
                 {!onePageView ? '' : (
-                  <div class="chapter-info-button"> Pg. {pageNumber + 1} / {chapter.pages.length} </div>
+                  <div className="chapter-info-button"> Pg. {pageNumber + 1} / {chapter.pages.length} </div>
                 )}
               </div>
           )}

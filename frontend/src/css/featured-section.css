@@ -1,0 +1,33 @@
+#featured {
+    width: 300px;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+    height: 25px;
+    margin-top: 20px;   
+}
+#section-title {
+    background: #1c1c1c;
+    color: white;
+    padding: 15px 0;
+}
+.featured-box {
+    background: #252525;
+    width: 300px;
+    display: block;
+}
+#featured-item {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    color: white;
+    padding: 5px 0;
+}
+#featured-description {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+#featured-description p {
+    margin-left: 15px;
+    text-align: left;
+}
