@@ -3,10 +3,10 @@ import '../css/form.css'
 
 const ChapterForm = (props) => {
     const { singleSeries } = props
-    const [title, setTitle] = useState('')
-    const [images, setImages] = useState([])
-    const [error, setError] = useState(null)
-    const [emptyFields, setEmptyFields] = useState([])
+    const [ title, setTitle ] = useState('')
+    const [ images, setImages ] = useState([])
+    const [ error, setError ] = useState(null)
+    const [ emptyFields, setEmptyFields ] = useState([])
     
     const handleSubmit = async (e) => {
         e.preventDefault()

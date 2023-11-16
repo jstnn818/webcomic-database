@@ -34,8 +34,8 @@ const Home = () => {
           </div>
             <div className="side-column">
             <div className="edit-button" onClick={switchEditMode}> 
-              <strong> {!editMode ? 'Edit' : 'Done'} </strong> 
-              <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'done'} </span>
+              <strong> {!editMode ? 'Edit' : 'Back'} </strong> 
+              <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'exit_to_app'} </span>
             </div>
             {!editMode ? '' : (<SeriesForm />)}
           </div>

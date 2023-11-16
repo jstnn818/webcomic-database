@@ -55,6 +55,26 @@ const SeriesPage = () => {
       })
     }
 
+    const submitDescription = async (e) => {
+      e.preventDefault()
+      const form = e.target
+      const formData = new FormData(form)
+      const updatedSeries = {
+          description: formData.get("paragraph-text")
+      }
+      const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
+          method: 'PATCH',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedSeries)
+      })
+      if (response.ok) {
+          console.log('description updated')
+          window.location.reload()
+      }
+    }
+
     const chapterListRenderer = () => {
       if (order.ascending) {
         return singleSeries.chapters && singleSeries.chapters.map((chapterId, index) => (
@@ -93,7 +113,19 @@ const SeriesPage = () => {
             </div>
             <div className='series-about'>
               <p><strong> Author: </strong> {singleSeries.author} </p>
-              <p><strong> Description: </strong> ... </p>
+              <p><strong> Description: </strong></p>
+              {!editMode ? 
+              <div className="description-textbox"> {singleSeries.description} </div>
+              :
+              <form onSubmit={ submitDescription }>
+                <textarea 
+                  name="paragraph-text" 
+                  cols="96" rows="5" 
+                  defaultValue={singleSeries.description}> 
+                </textarea>
+                <button type="submit"> Submit </button>
+              </form>
+              }
             </div>
           </div>
           <div className="chapters">
@@ -109,8 +141,8 @@ const SeriesPage = () => {
         </div>
         <div className="side-column">
           <div className="edit-button" onClick={switchEditMode}> 
-            <strong> {!editMode ? 'Edit' : 'Done'} </strong> 
-            <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'done'} </span>
+            <strong> {!editMode ? 'Edit' : 'Back'} </strong> 
+            <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'exit_to_app'} </span>
           </div>
           {!editMode ? '' : (<ChapterForm singleSeries={singleSeries} />)}
         </div>

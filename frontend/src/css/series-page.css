@@ -42,3 +42,27 @@
     float: right;
     margin-right: 17px;
 }
+
+.description-textbox {
+    background: #353536;
+    color: white;
+    width: 96%;
+    height: 40%;
+    padding: 1px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+    text-indent: -4px;
+    margin: 0;
+}
+
+textarea {
+    background: #353536;
+    color: white;
+    font-family: "Poppins";
+    font-size: 16px;
+    width: 96%;
+    resize: none;
+    overflow: hidden;
+    padding: 0px 4px;
+}

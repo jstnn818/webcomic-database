@@ -1,4 +1,4 @@
-form {
+#series-form, #chapter-form {
     background: #1c1c1c;
     border-radius: 4px;
     box-shadow: 2px 2px 5px #0000000d;
@@ -45,7 +45,7 @@ input {
     display: flex;
     justify-content: center;
 }
-form button {
+.submit-button button {
     margin: 10px 0 10px 0;
     background: var(--primary);
     border: 0;
