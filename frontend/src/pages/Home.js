@@ -8,6 +8,10 @@ import SeriesForm from '../components/SeriesForm'
 
 const Home = () => {
     const { series, dispatch } = useSeriesContext()
+    const [ order, setOrder ] = useState({
+      ascending: true,
+      icon: "arrow_downward"
+    })
     const [ editMode, setEditMode ] = useState(false)
   
     useEffect(() => {
@@ -26,27 +30,66 @@ const Home = () => {
       setEditMode(!editMode)
     }
 
+    const stringCompare = (a, b) => {
+      var nameA = a.title.toUpperCase()
+      var nameB = b.title.toUpperCase()
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+          return 1
+      }
+      return 0
+    }
+
+    const switchSeriesOrder = () => {
+      setOrder({
+        ascending: !order.ascending,
+        icon: order.ascending ? "arrow_upward" : "arrow_downward"
+      })
+    }
+
+    const seriesListRenderer = () => {
+      const sortedOrder = [...series].sort(stringCompare)
+
+      if (order.ascending) {
+        return series && sortedOrder.map(singleSeries => (
+          <SeriesDetails singleSeries={singleSeries} key={singleSeries._id} editMode={editMode}/>
+        ))
+      }
+      else {
+        return series && sortedOrder.toReversed().map(singleSeries => (
+          <SeriesDetails singleSeries={singleSeries} key={singleSeries._id} editMode={editMode}/>
+        ))
+      }
+    }
+
     if (!series) {
       return <div> </div>
     }
 
     return (
         <div className="home">
-          <div className="series">
-            {series && series.map(singleSeries => (
-              <SeriesDetails singleSeries={singleSeries} key={singleSeries._id} editMode={editMode}/>
-            ))}
+          <div>
+            <div id="series-top"> 
+             <strong> Comic List </strong>
+             <span id="reorder" className="material-symbols-outlined" 
+              onClick={switchSeriesOrder}> {order.icon} </span>
+            </div>
+            <div className="series">
+              {seriesListRenderer()}
+            </div>
           </div>
-            <div className="side-column">
-              <div className="edit-button" onClick={switchEditMode}> 
-                <strong> {!editMode ? 'Edit' : 'Back'} </strong> 
-                <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'exit_to_app'} </span>
-              </div>
-              
-              {!editMode ? '' : (<SeriesForm />)}
-              <div className="side-column-box">
-                <FeaturedSection series={series} />
-              </div>
+          <div className="side-column">
+            <div className="edit-button" onClick={switchEditMode}> 
+              <strong> {!editMode ? 'Edit' : 'Back'} </strong> 
+              <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'exit_to_app'} </span>
+            </div>
+            
+            {!editMode ? '' : (<SeriesForm />)}
+            <div className="side-column-box">
+              <FeaturedSection series={series} />
+            </div>
               
           </div>
         </div>

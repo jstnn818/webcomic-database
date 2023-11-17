@@ -38,7 +38,7 @@
     margin: 0;
 }
 
-#reorder {
+.chapter-header #reorder {
     float: right;
     margin-right: 17px;
 }

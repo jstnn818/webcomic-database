@@ -39,6 +39,20 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 30px;
 }
+#series-top {
+  background: #252525;
+  margin-bottom: 20px;
+  color: white;
+  height: 30px;
+  width: 915px;
+  border-radius: 4px;
+  font-size: 20px;
+  padding: 5px 15px;
+}
+#series-top #reorder {
+  float: right;
+  margin-top: 3px;
+}
 .series {
   display: grid;
   gap: 10px;

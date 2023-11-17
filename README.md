@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.
 
-### `nodemon server.js` in BACKEND
+### `npm run dev` in BACKEND
 
 Runs the backend of the server. Users must connect their own backend, creating an '.env',
 in the format of...
