@@ -62,7 +62,7 @@ const FeaturedItem = ({ singleSeries, index }) => {
                 <div style={{ color: '#9b9b9b' }}>
                     <p> {singleSeries.author}</p>
                     <p> <span className="material-symbols-outlined" style={{ fontSize: 15 }}> visibility 
-                    </span> {singleSeries.views} </p>
+                    </span> {' ' + singleSeries.views} </p>
                 </div>
                 </Link>
             </div>

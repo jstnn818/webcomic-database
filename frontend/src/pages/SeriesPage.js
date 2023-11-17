@@ -100,7 +100,6 @@ const SeriesPage = () => {
       }
     }
 
-
     return (
       <div className="home">
         <div className="series-container">
@@ -113,7 +112,13 @@ const SeriesPage = () => {
             </div>
             <div className='series-about'>
               <p><strong> Author: </strong> {singleSeries.author} </p>
-              <p><strong> Views: </strong> {singleSeries.views + 1}</p>
+              <div style={{ textColor: '#9b9b9b' }}>
+                <p><strong> Views: </strong> 
+                  <span className="material-symbols-outlined" style={{ fontSize: 15 }}> visibility  </span>
+                  {singleSeries.views + 1}
+                </p>
+              </div>
+               
               <p><strong> Description: </strong></p>
               {!editMode ? 
               <div className="description-textbox"> {singleSeries.description} </div>
