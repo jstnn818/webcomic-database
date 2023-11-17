@@ -51,8 +51,9 @@
     padding: 1px 5px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: pre;
-    text-indent: -4px;
+    overflow-wrap: anywhere;
+    /*white-space: pre;
+    text-indent: -4px;*/
     margin: 0;
 }
 
