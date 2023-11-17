@@ -1,5 +1,6 @@
 import '../css/featured-section.css'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const FeaturedItem = ({ singleSeries, index }) => {
 
@@ -31,12 +32,39 @@ const FeaturedItem = ({ singleSeries, index }) => {
         return singleSeries.title
     }
 
+    const handleClick = async () => {
+        const updatedSeries = {
+            views: singleSeries.views + 1
+        }
+        const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedSeries)
+        })
+        const json = await response.json()
+        if (response.ok) {
+            console.log(`Series ${json.views}`)
+        }
+    }
+
     return (
         <div id="featured-item">
             <h4> {index + 1} </h4>
             <div id="featured-description"> 
                 {imageConverter()}
-                <p> {seriesTitleRender()} </p>
+                <Link 
+                    onClick={handleClick}
+                    to={'/series/' + singleSeries._id} 
+                    style={{ textDecoration: 'none', color: 'white' }}>
+                <p><strong> {seriesTitleRender()} </strong></p>
+                <div style={{ color: '#9b9b9b' }}>
+                    <p> {singleSeries.author}</p>
+                    <p> <span className="material-symbols-outlined" style={{ fontSize: 15 }}> visibility 
+                    </span> {singleSeries.views} </p>
+                </div>
+                </Link>
             </div>
         </div>
     )

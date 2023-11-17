@@ -113,6 +113,7 @@ const SeriesPage = () => {
             </div>
             <div className='series-about'>
               <p><strong> Author: </strong> {singleSeries.author} </p>
+              <p><strong> Views: </strong> {singleSeries.views + 1}</p>
               <p><strong> Description: </strong></p>
               {!editMode ? 
               <div className="description-textbox"> {singleSeries.description} </div>

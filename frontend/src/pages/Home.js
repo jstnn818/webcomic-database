@@ -42,6 +42,14 @@ const Home = () => {
       return 0
     }
 
+    const viewsCompare = (a, b) => {
+      var viewsDiff = b.views - a.views
+      if (viewsDiff === 0) {
+        return b.name.localeCompare(a.name);
+      }
+      return viewsDiff
+    }
+
     const switchSeriesOrder = () => {
       setOrder({
         ascending: !order.ascending,
@@ -88,7 +96,8 @@ const Home = () => {
             
             {!editMode ? '' : (<SeriesForm />)}
             <div className="side-column-box">
-              <FeaturedSection series={series} />
+              <FeaturedSection series={[...series].sort(viewsCompare)} title="Most Viewed Comic" count={1}/>
+              <FeaturedSection series={series} title="Most Recent Comics" count={3}/>
             </div>
               
           </div>

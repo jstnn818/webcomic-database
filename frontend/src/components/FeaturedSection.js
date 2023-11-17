@@ -1,13 +1,13 @@
 import '../css/featured-section.css'
 import FeaturedItem from '../components/FeaturedItem'
 
-const FeaturedSection = ({ series }) => {
+const FeaturedSection = ({ series, title, count }) => {
 
     return (
         <div id="featured">
-            <div id="section-title"><strong> Most Recent Comics </strong></div>
+            <div id="section-title"><strong> {title} </strong></div>
             <div className="featured-box">
-                {series && series.slice(0,3).map((singleSeries, index) => (
+                {series && series.slice(0,count).map((singleSeries, index) => (
                     <FeaturedItem index={index} singleSeries={singleSeries} key={singleSeries._id}/>
                 ))}
             </div>

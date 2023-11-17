@@ -18,6 +18,11 @@ const seriesSchema = new Schema({
     description: {
         type: String,
     },
+    views: {
+        type: Number,
+        integer: true,
+        default: 0
+    },
     chapters: [String]
 }, { timestamps: true })
 

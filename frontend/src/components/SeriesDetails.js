@@ -20,7 +20,7 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
           fetchCover()
     }, [singleSeries])
 
-    const handleClick = async () => {
+    const handleDelete = async () => {
         const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
             method: 'DELETE'
         })
@@ -28,6 +28,23 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
 
         if (response.ok) {
             dispatch({type: 'DELETE_SERIES', payload: json.series})
+        }
+    }
+
+    const handleClick = async () => {
+        const updatedSeries = {
+            views: singleSeries.views + 1
+        }
+        const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedSeries)
+        })
+        const json = await response.json()
+        if (response.ok) {
+            console.log(`Series ${json.views}`)
         }
     }
 
@@ -50,7 +67,10 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
 
     return (
         <div className="series-details">
-            <Link to={'/series/' + singleSeries._id} style={{ textDecoration: 'none' }}>
+            <Link 
+                onClick={handleClick}
+                to={'/series/' + singleSeries._id} 
+                style={{ textDecoration: 'none' }}>
                 <h4> {seriesTitleRender()} </h4>
             </Link>
             <div className="series-description">
@@ -64,7 +84,7 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
             </div>
             <p className='create-date'>{formatDistanceToNow(new Date(singleSeries.createdAt), { addSuffix: true })}</p>
             {!editMode ? '' : (
-                <span className="material-symbols-outlined" onClick={handleClick}> delete </span>
+                <span className="material-symbols-outlined" onClick={handleDelete}> delete </span>
             )}
             
         </div>
