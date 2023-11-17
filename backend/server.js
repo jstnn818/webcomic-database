@@ -6,6 +6,7 @@ const cors = require('cors')
 const seriesRoutes = require('./routes/series')
 const chapterRoutes = require('./routes/chapter')
 const imageRoutes = require('./routes/image')
+const userRoutes = require('./routes/user')
 
 //express app
 const app = express()
@@ -17,7 +18,7 @@ app.use(cors())
 app.use('/api/series', seriesRoutes)
 app.use('/api/chapters', chapterRoutes)
 app.use('/api/images', imageRoutes)
-
+app.use('/api/user', userRoutes)
 //routes
 app.get('/', (req, res) => {
     res.json({mssg: 'Welcome to the app'})
