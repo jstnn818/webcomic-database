@@ -98,3 +98,38 @@ header a {
 .side-column-box {
   background:#353536
 }
+
+/* navbar */
+nav {
+  display: flex;
+  align-items: center;
+}
+nav a {
+  margin-left: 15px;
+  padding: 20px;
+  background-color: #252525;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px #0000000d;
+}
+
+/* auth forms */
+.authform {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  
+  color: white;
+  border-radius: 4px;
+}
+.authform div {
+  background-color: #1c1c1c;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px #0000000d;
+  padding: 0 5px;
+  display: flex;
+  justify-content: center;
+}
+.authform form {
+  background: #252525;
+  padding: 5px 0;
+}

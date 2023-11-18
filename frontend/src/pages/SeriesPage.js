@@ -129,7 +129,9 @@ const SeriesPage = () => {
                   cols="96" rows="5" 
                   defaultValue={singleSeries.description}> 
                 </textarea>
-                <button type="submit"> Submit </button>
+                <div className="submit-button">
+                  <button type="submit" style={{margin: 0}}> Submit </button>
+                </div>
               </form>
               }
             </div>
