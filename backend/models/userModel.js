@@ -16,6 +16,25 @@ const userSchema = new Schema({
     }
 })
 
+// static login method
+userSchema.statics.login = async function(username, password) {
+    if (!username || !password) {
+        throw Error('All fields must be filled')
+    }
+    
+    const user = await this.findOne({ username })
+    if (!user) {
+        throw Error('User does not exist')
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+    if (!match) {
+        throw Error('Incorrect password')
+    }
+
+    return user
+}
+
 // static signup method
 userSchema.statics.signup = async function(username, password) {
 

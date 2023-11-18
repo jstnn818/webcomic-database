@@ -7,7 +7,7 @@ const FeaturedSection = ({ series, title, count }) => {
         <div id="featured">
             <div id="section-title"><strong> {title} </strong></div>
             <div className="featured-box">
-                {series && series.slice(0,count).map((singleSeries, index) => (
+                {series && series.slice(0, count).map((singleSeries, index) => (
                     <FeaturedItem index={index} singleSeries={singleSeries} key={singleSeries._id}/>
                 ))}
             </div>

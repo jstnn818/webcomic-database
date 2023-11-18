@@ -93,13 +93,11 @@ const Home = () => {
               <strong> {!editMode ? 'Edit' : 'Back'} </strong> 
               <span className="material-symbols-outlined"> {!editMode ? 'edit' : 'exit_to_app'} </span>
             </div>
-            
             {!editMode ? '' : (<SeriesForm />)}
             <div className="side-column-box">
               <FeaturedSection series={[...series].sort(viewsCompare)} title="Most Viewed" count={1}/>
               <FeaturedSection series={series} title="Most Recent" count={3}/>
             </div>
-              
           </div>
         </div>
     )

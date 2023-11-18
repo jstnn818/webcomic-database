@@ -21,7 +21,8 @@ in the format of...
 PORT=[port_number] \
 DB_USER=[db_username] \
 DB_PASSWORD=[db_password] \
-DB_HOST=[db_host] 
+DB_HOST=[db_host] \
+SECRET=[secret_string]
 
 ## Home Page
 
