@@ -102,7 +102,7 @@ return (
         <div className="submit-button">
             <button> Upload </button>
         </div>
-        {error && <div className="error"> {error} </div>}
+        {error && <div id="chapter-error" className="error"> {error} </div>}
     </form>
     )
 }

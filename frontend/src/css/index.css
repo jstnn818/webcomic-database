@@ -116,8 +116,6 @@ nav a {
 .authform {
   max-width: 400px;
   margin: 40px auto;
-  padding: 20px;
-  
   color: white;
   border-radius: 4px;
 }
@@ -131,5 +129,5 @@ nav a {
 }
 .authform form {
   background: #252525;
-  padding: 5px 0;
+  padding-top: 5px;
 }

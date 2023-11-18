@@ -65,7 +65,7 @@ const SeriesForm = () => {
         }
     }
 
-    return (
+    return (<div>
         <form className="create" id="series-form" onSubmit={ handleSubmit } encType=''>
             <h3> Add a New Series </h3>
             <div className="form-info">
@@ -96,8 +96,9 @@ const SeriesForm = () => {
             <div className="submit-button">
                 <button> Upload </button>
             </div>
-            {error && <div className="error"> {error} </div>}
+            
         </form>
+        {error && <div id="series-error" className="error"> {error} </div>}</div>
     )
 }
 

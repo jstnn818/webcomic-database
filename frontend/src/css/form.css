@@ -2,7 +2,7 @@
     background: #1c1c1c;
     border-radius: 4px;
     box-shadow: 2px 2px 5px #0000000d;
-    width: 300px;  
+    width: 300px;
 }
 
 #series-form {
@@ -61,7 +61,10 @@ div.error {
     border: 1px solid var(--error);
     color: var(--error);
     border-radius: 4px;
-    margin: 20px 0;
+}
+
+#series-error, #chapter-error {
+    width: 280px;
 }
 
 input.error { 
