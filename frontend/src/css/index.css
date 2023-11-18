@@ -104,12 +104,19 @@ nav {
   display: flex;
   align-items: center;
 }
-nav a {
+nav a, nav button {
   margin-left: 15px;
   padding: 20px;
   background-color: #252525;
   border-radius: 4px;
   box-shadow: 2px 2px 5px #0000000d;
+}
+nav button {
+  color: white;
+  font-family: "Poppins";
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
 }
 
 /* auth forms */
