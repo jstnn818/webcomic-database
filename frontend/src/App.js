@@ -4,6 +4,7 @@ import { useAuthContext } from './hooks/useAuthContext'
 //pages and components
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
+//import UserPage from './pages/UserPage'
 import SeriesPage from './pages/SeriesPage'
 import ChapterPage from './pages/ChapterPage'
 import Login from './pages/Login'

@@ -10,7 +10,6 @@ const Navbar = () => {
         logout()
     }
 
-
     return (
         <header>
             <div className="container">
@@ -20,7 +19,7 @@ const Navbar = () => {
                 <nav>
                     {user && (
                         <div className="user-bar">
-                            <span> {user.username} </span>
+                            <button><strong> {user.username} </strong></button>
                             <button onClick={handleClick}> <strong> Logout </strong></button>
                         </div>
                     )}

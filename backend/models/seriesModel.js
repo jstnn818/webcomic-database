@@ -18,6 +18,10 @@ const seriesSchema = new Schema({
     description: {
         type: String,
     },
+    user_id: {
+        type: String,
+        required: true,
+    },
     views: {
         type: Number,
         integer: true,

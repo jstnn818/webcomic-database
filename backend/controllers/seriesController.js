@@ -44,7 +44,8 @@ const createSeries = async (req, res) => {
 
     // add doc to db
     try {
-        const series = await Series.create({title, author, cover})
+        const user_id = req.user._id
+        const series = await Series.create({title, author, cover, user_id})
         res.status(200).json(series)
     } catch (error) {
         res.status(400).json({error: error.message})
