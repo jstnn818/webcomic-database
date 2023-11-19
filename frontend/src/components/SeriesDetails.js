@@ -1,4 +1,5 @@
 import { useSeriesContext } from '../hooks/useSeriesContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/series-details.css'
@@ -8,6 +9,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const SeriesDetails = ({ singleSeries, editMode }) => {
 
+    const { user } = useAuthContext()
     const { dispatch } = useSeriesContext()
     const [ cover, setCover ] = useState(null)
 
@@ -21,8 +23,16 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
     }, [singleSeries])
 
     const handleDelete = async () => {
+
+        if (!user) {
+            return
+        }
+
         const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
         })
         const json = await response.json()
 

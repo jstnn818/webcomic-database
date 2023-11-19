@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
+import { useAuthContext } from '../hooks/useAuthContext'
+import { useNavigate  } from 'react-router-dom'
 
 //components
 import SeriesDetails from '../components/SeriesDetails'
@@ -7,7 +9,11 @@ import FeaturedSection from '../components/FeaturedSection'
 import SeriesForm from '../components/SeriesForm'
 
 const Home = () => {
+
+    const navigate = useNavigate()
+
     const { series, dispatch } = useSeriesContext()
+    const { user } = useAuthContext()
     const [ order, setOrder ] = useState({
       ascending: true,
       icon: "arrow_downward"
@@ -27,7 +33,12 @@ const Home = () => {
     }, [dispatch])
 
     const switchEditMode = () => {
-      setEditMode(!editMode)
+      if (user) {
+        setEditMode(!editMode)
+      }
+      else {
+        navigate(`/login`)
+      }
     }
 
     const stringCompare = (a, b) => {

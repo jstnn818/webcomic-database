@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 import '../css/form.css'
 
 const SeriesForm = () => {
 
+    const { user } = useAuthContext()
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [image, setImage] = useState(null)
@@ -13,6 +15,11 @@ const SeriesForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (!user) {
+            setError('Not logged in')
+            return
+        }
+
         const uploadImage = async (image) => {
             const coverData = new FormData()
             coverData.append('name', 'cover')
@@ -22,6 +29,9 @@ const SeriesForm = () => {
         
             const response = await fetch('http://localhost:4000/api/images', {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                },
                 body: coverData,
             })
         
@@ -41,7 +51,8 @@ const SeriesForm = () => {
                 method: 'POST',
                 body: JSON.stringify(series),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 }
             })
             const json = await response.json()

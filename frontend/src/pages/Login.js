@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
@@ -8,10 +9,8 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         await login(username, password)
     }
-
 
     return (
         <div className="authform">
@@ -36,6 +35,7 @@ const Login = () => {
                 </div>
             </form>
             {error && <div className="error"> {error} </div>}
+            <Link id="signup-link" to={'/signup'}> Don't have an account? Sign Up! </Link>
         </div>
     )
 }

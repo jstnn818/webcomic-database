@@ -8,7 +8,6 @@ const {
 } = require('../controllers/imageController')
 const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
-router.use(requireAuth)
 
 // Storage
 const Storage = multer.diskStorage({
@@ -28,6 +27,9 @@ router.get('/', getImages)
 
 // GET single image
 router.get('/:id', getImage)
+
+// Provide Auth for all Non-GET requests
+router.use(requireAuth)
 
 // POST new image
 router.post('/', Image.single('testImage'), createImage)

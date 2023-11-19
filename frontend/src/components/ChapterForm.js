@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 import '../css/form.css'
 
 const ChapterForm = (props) => {
+
+    const { user } = useAuthContext()
     const { singleSeries } = props
     const [ title, setTitle ] = useState('')
     const [ images, setImages ] = useState([])
@@ -10,6 +13,11 @@ const ChapterForm = (props) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        if (!user) {
+            setError('Not logged in')
+            return
+        }
 
         const pages = []
 
@@ -20,6 +28,9 @@ const ChapterForm = (props) => {
         
             const response = await fetch('http://localhost:4000/api/images', {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                },
                 body: page,
             })
         
@@ -36,7 +47,8 @@ const ChapterForm = (props) => {
                 method: 'POST',
                 body: JSON.stringify(chapter),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 }
             })
             const json = await response.json()
@@ -58,7 +70,8 @@ const ChapterForm = (props) => {
                 const responseSeries = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
                   method: 'PATCH',
                   headers: {
-                      'Content-Type': 'application/json'
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${user.token}`
                   },
                   body: JSON.stringify(updatedSeries)
                 })

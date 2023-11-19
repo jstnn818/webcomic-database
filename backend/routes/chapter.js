@@ -8,13 +8,15 @@ const {
 } = require('../controllers/chapterController')
 const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
-router.use(requireAuth)
 
 // GET all chapters
 router.get('/', getChapters)
 
 // GET single chapter
 router.get('/:id', getChapter)
+
+// Provide Auth for all Non-GET requests
+router.use(requireAuth)
 
 // POST new chapter
 router.post('/', createChapter)

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 import ChapterForm from '../components/ChapterForm'
 import ChapterDetails from '../components/ChapterDetails'
@@ -7,6 +8,9 @@ import '../css/series-page.css'
 
 const SeriesPage = () => {
 
+  const navigate = useNavigate()
+
+  const { user } = useAuthContext()
   const { seriesId } = useParams()
   const [ singleSeries, setSingleSeries ] = useState(null)
   const [ cover, setCover ] = useState(null)
@@ -35,7 +39,12 @@ const SeriesPage = () => {
     }
 
     const switchEditMode = () => {
-      setEditMode(!editMode)
+      if (user) {
+        setEditMode(!editMode)
+      }
+      else {
+        navigate(`/login`)
+      }
     }
 
     const imageConverter = () => {
@@ -57,6 +66,11 @@ const SeriesPage = () => {
 
     const submitDescription = async (e) => {
       e.preventDefault()
+
+      if (!user) {
+        return
+      }
+
       const form = e.target
       const formData = new FormData(form)
       const updatedSeries = {
