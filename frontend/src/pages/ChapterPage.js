@@ -120,7 +120,7 @@ const ChapterPage = () => {
           <div className='chapter-buttons'>
             {onePageView && 
               (<>
-                <span className="material-symbols-outlined" onClick={firstPage}> keyboard_double_arrow_left </span>
+                <span className="material-symbols-outlined" onClick={firstPage}> first_page </span>
                 <span className="material-symbols-outlined" onClick={prevPage}> keyboard_arrow_left </span>
               </>
               )}
@@ -128,7 +128,7 @@ const ChapterPage = () => {
             {onePageView && 
               (<>
                 <span className="material-symbols-outlined" onClick={nextPage}> keyboard_arrow_right </span>
-                <span className="material-symbols-outlined" onClick={lastPage}> keyboard_double_arrow_right </span>
+                <span className="material-symbols-outlined" onClick={lastPage}> last_page </span>
               </>
               )}
           </div>
