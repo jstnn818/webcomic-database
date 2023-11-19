@@ -6,21 +6,23 @@ const {
     deleteChapter,
     updateChapter 
 } = require('../controllers/chapterController')
+const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
+router.use(requireAuth)
 
-// GET all workouts
+// GET all chapters
 router.get('/', getChapters)
 
-// GET single workout
+// GET single chapter
 router.get('/:id', getChapter)
 
-// POST new workout
+// POST new chapter
 router.post('/', createChapter)
 
-// DELETE new workout
+// DELETE chapter
 router.delete('/:id', deleteChapter)
 
-// UPDATE a workout
+// UPDATE a chapter
 router.patch('/:id', updateChapter)
 
 module.exports = router

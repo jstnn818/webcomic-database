@@ -6,7 +6,9 @@ const {
     createImage,
     deleteImage,
 } = require('../controllers/imageController')
+const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
+router.use(requireAuth)
 
 // Storage
 const Storage = multer.diskStorage({

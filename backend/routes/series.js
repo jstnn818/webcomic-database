@@ -6,21 +6,23 @@ const {
     deleteSeries,
     updateSeries 
 } = require('../controllers/seriesController')
+const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
+router.use(requireAuth)
 
-// GET all workouts
+// GET all series
 router.get('/', getSeries)
 
-// GET single workout
+// GET single series
 router.get('/:id', getOneSeries)
 
-// POST new workout
+// POST new series
 router.post('/', createSeries)
 
-// DELETE new workout
+// DELETE series
 router.delete('/:id', deleteSeries)
 
-// UPDATE a workout
+// UPDATE a series
 router.patch('/:id', updateSeries)
 
 module.exports = router
