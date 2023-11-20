@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 
 import ChapterForm from '../components/ChapterForm'
 import ChapterDetails from '../components/ChapterDetails'
+//import CommentSection from '../components/CommentSection'
 import '../css/series-page.css'
 
 const SeriesPage = () => {
@@ -168,7 +169,6 @@ const SeriesPage = () => {
           </div>
           {!editMode ? '' : (<ChapterForm singleSeries={singleSeries} />)}
         </div>
-        
       </div>
     )  
 }

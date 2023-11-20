@@ -27,6 +27,18 @@ const seriesSchema = new Schema({
         integer: true,
         default: 0
     },
+    comments: [
+        {
+            username: {
+                type: String,
+                required: true,
+            },
+            text: {
+                type: String,
+                required: true,
+            },
+        },
+    ],
     chapters: [String]
 }, { timestamps: true })
 
