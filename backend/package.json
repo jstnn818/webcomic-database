@@ -24,5 +24,8 @@
     "path": "^0.12.7",
     "uuid": "^9.0.0",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }
