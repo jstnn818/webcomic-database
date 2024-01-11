@@ -1,3 +1,4 @@
+import React from 'react'
 import '../css/featured-section.css'
 import FeaturedItem from '../components/FeaturedItem'
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useNavigate  } from 'react-router-dom'
