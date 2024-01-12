@@ -1,4 +1,4 @@
-# Comic Hub
+# WebComic Database
 
 Web-App designed for users to upload and read fanmade comics. Made in with MERN-Stack, using JavaScript in Frontend and Backend, and containerized via Docker.
 
@@ -6,11 +6,12 @@ This Web-App utilizes the MERN-Stack (MongoDB, Express, React, Node) in order to
 
 ## Available Scripts
 
-In the project directory, you can run:
+There are a few ways to run the Web-App...
 
 ### DOCKER
 
-Comic Hub is containerized with Docker, and can be run using Docker Compose. Use `docker-compose up` to build the image, and run the container.
+WebComic Database is containerized with Docker, and can be run using Docker Compose. Use `docker-compose up` to build the image, and run the container. \
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 NOTE: Ensure that the '.env' information, mentioned in the BACKEND section, to be created and filled, prior to building the app.
 
