@@ -1,8 +1,15 @@
 import React from 'react'
 import '../css/featured-section.css'
-import FeaturedItem from '../components/FeaturedItem'
+import { Series } from '../interfaces'
+import FeaturedItem from './FeaturedItem'
 
-const FeaturedSection = ({ series, title, count }) => {
+type Props = {
+    series: Series[],
+    title: string,
+    count: number,
+}
+
+const FeaturedSection = ({ series, title, count }: Props) => {
 
     return (
         <div id="featured">

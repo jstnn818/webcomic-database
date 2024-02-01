@@ -1,10 +1,16 @@
 import '../css/featured-section.css'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Series, Image } from '../interfaces'
 
-const FeaturedItem = ({ singleSeries, index }) => {
+type Props = {
+    singleSeries: Series,
+    index: number,
+}
 
-    const [ cover, setCover ] = useState(null)
+const FeaturedItem = ({ singleSeries, index }: Props) => {
+
+    const [ cover, setCover ] = useState<Image | null>(null)
 
     useEffect(() => {
         const fetchCover = async () => {
