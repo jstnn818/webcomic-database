@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useLocation, useNavigate, Link  } from 'react-router-dom'
 import PageDetails from '../components/PageDetails'
+import { Chapter } from '../interfaces'
 import '../css/chapter-page.css'
 
 const ChapterPage = () => {
@@ -9,7 +10,7 @@ const ChapterPage = () => {
 
     const { seriesId } = useParams()
     const { seriesTitle, chapters, chapterIndex } = location.state
-    const [ chapter, setChapter ] = useState(null)
+    const [ chapter, setChapter ] = useState<Chapter | null>(null)
 
     const [ pageNumber, setPageNumber ] = useState(0)
     const [ onePageView, setOnePageView ] = useState(true)
@@ -19,7 +20,7 @@ const ChapterPage = () => {
       const fetchChapter = async () => {
         setLoading(true)
         try {
-          const response = await fetch(`http://localhost:4000/api/chapters/${chapters[chapterIndex]}`)
+          const response = await fetch(`/api/chapters/${chapters[chapterIndex]}`)
           const json = await response.json()
           setChapter(json)
         }
@@ -44,7 +45,7 @@ const ChapterPage = () => {
     }
 
     const nextPage = () => {
-      if (onePageView && pageNumber < chapter.pages.length - 1) {
+      if (onePageView && pageNumber < chapter!.pages.length - 1) {
         setPageNumber(pageNumber + 1)
       }
       else if (chapterIndex < chapters.length - 1) {
@@ -53,9 +54,10 @@ const ChapterPage = () => {
       else {
         navigate(`/series/${seriesId}`)
       }
+
     }
 
-    const goToChapter = (chapterIndex) => {
+    const goToChapter = (chapterIndex: number) => {
       const chapterData = {
           seriesTitle: seriesTitle,
           chapters: chapters,
@@ -69,7 +71,7 @@ const ChapterPage = () => {
     }
 
     const lastPage = () => {
-      setPageNumber(chapter.pages.length - 1)
+      setPageNumber(chapter!.pages.length - 1)
     }
 
     const switchPageView = () => {
@@ -79,7 +81,7 @@ const ChapterPage = () => {
 
     const pageRenderer = () => {
       if (onePageView) {
-        const singlePicture = chapter.pages[pageNumber]
+        const singlePicture = chapter!.pages[pageNumber]
         return (
           <div className='page-container'>
             <PageDetails pageId={singlePicture}></PageDetails>
@@ -89,7 +91,7 @@ const ChapterPage = () => {
         )
       }
       else {
-        return chapter.pages.map((singlePicture) => {
+        return chapter!.pages.map((singlePicture) => {
           return (
             <div className='page-container'>
               <PageDetails pageId={singlePicture}></PageDetails>
@@ -100,9 +102,11 @@ const ChapterPage = () => {
         })
       }
     }
+
     if (!chapter || chapter.pages.length === 0) {
       return <div> </div>
     }
+
     return (
       <div>
         <Link id='chapter-title' to={'/series/' + seriesId}> {seriesTitle} </Link>

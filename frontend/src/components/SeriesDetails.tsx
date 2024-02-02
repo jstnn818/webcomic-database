@@ -2,20 +2,26 @@ import { useSeriesContext } from '../hooks/useSeriesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Series, Image } from '../interfaces'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import '../css/series-details.css'
 
-// date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const SeriesDetails = ({ singleSeries, editMode }) => {
+type Props = {
+    singleSeries: Series,
+    editMode: boolean,
+    key: string
+}
+
+const SeriesDetails = ({ singleSeries, editMode }: Props) => {
 
     const { user } = useAuthContext()
     const { dispatch } = useSeriesContext()
-    const [ cover, setCover ] = useState(null)
+    const [ cover, setCover ] = useState<Image | null>(null)
 
     useEffect(() => {
         const fetchCover = async () => {
-            const response = await fetch(`http://localhost:4000/api/images/${singleSeries.cover}`)
+            const response = await fetch(`/api/images/${singleSeries.cover}`)
             const json = await response.json()
             setCover(json)
           }
@@ -28,10 +34,10 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
             return
         }
 
-        const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
+        const response = await fetch(`/api/series/${singleSeries._id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${user.token}`
+                'Authorization': `Bearer ${(user as any).token}`
             }
         })
         const json = await response.json()
@@ -45,7 +51,7 @@ const SeriesDetails = ({ singleSeries, editMode }) => {
         const updatedSeries = {
             views: singleSeries.views + 1
         }
-        const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
+        const response = await fetch(`/api/series/${singleSeries._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

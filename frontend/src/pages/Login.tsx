@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLogin } from '../hooks/useLogin'
 
@@ -7,7 +7,7 @@ const Login = () => {
     const [ password, setPassword ] = useState('')
     const { login, isLoading, error } = useLogin()
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         await login(username, password)
     }
@@ -31,7 +31,7 @@ const Login = () => {
                     value={password}
                 />
                 <div className="submit-button">
-                    <button disabled={isLoading}> Login </button>
+                    <button disabled={isLoading || undefined}> Login </button>
                 </div>
             </form>
             {error && <div className="error"> {error} </div>}

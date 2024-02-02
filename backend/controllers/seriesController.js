@@ -27,6 +27,7 @@ const getOneSeries = async (req, res) => {
 //create a series
 const createSeries = async (req, res) => {
     const {title, author, cover} = req.body
+    console.log(req.body)
     let emptyFields = []
 
     if (!title) {

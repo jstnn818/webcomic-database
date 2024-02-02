@@ -2,16 +2,25 @@ import { Link } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { Series, Chapter } from '../interfaces'
 import '../css/chapter-details.css'
 
-const ChapterDetails = ({ chapterId, singleSeries, index, editMode }) => {
+type Props = {
+    chapterId: string,
+    singleSeries: Series,
+    index: number,
+    editMode: boolean,
+    key: string
+}
+
+const ChapterDetails = ({ chapterId, singleSeries, index, editMode }: Props) => {
 
     const { user } = useAuthContext()
-    const [ chapter, setChapter ] = useState(null)
+    const [ chapter, setChapter ] = useState<Chapter | null>(null)
 
     useEffect(() => {
         const fetchChapter = async () => {
-            const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`)
+            const response = await fetch(`/api/chapters/${chapterId}`)
             const json = await response.json()
             setChapter(json)
         }
@@ -27,19 +36,19 @@ const ChapterDetails = ({ chapterId, singleSeries, index, editMode }) => {
         const updatedSeries = {
             chapters: singleSeries.chapters.filter((w) => w !== chapterId)
         }
-        const responseSeries = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
+        const responseSeries = await fetch(`/api/series/${singleSeries._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
+                'Authorization': `Bearer ${(user as any).token}`
             },
             body: JSON.stringify(updatedSeries)
         })
         if (responseSeries.ok) {
-            const response = await fetch(`http://localhost:4000/api/chapters/${chapterId}`, {
+            const response = await fetch(`/api/chapters/${chapterId}`, {
                 method: 'DELETE',
                 headers: {
-                    'Authorization': `Bearer ${user.token}`
+                    'Authorization': `Bearer ${(user as any).token}`
                 }
             })
             const json = await response.json()

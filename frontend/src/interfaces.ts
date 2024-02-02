@@ -20,12 +20,16 @@ export interface Image {
         }
         contentType: string
     }
+    createdAt: Date
+    updatedAt: Date
 }
 
 export interface Chapter {
     _id: string
     title: string
     pages: string[]
+    createdAt: Date
+    updatedAt: Date
 }
 
 export interface Series {
@@ -38,4 +42,6 @@ export interface Series {
     views: number
     comments: Comment[]
     chapters: string[]
+    createdAt: Date
+    updatedAt: Date
 }

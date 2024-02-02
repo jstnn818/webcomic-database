@@ -1,5 +1,11 @@
 import React from 'react'
-const CommentSection = ({ singleSeries }) => {
+import { Series } from '../interfaces'
+
+type Props = {
+    singleSeries: Series,
+}
+
+const CommentSection = ({ singleSeries }: Props) => {
 
     const submitComment = () => {
         return
@@ -10,7 +16,7 @@ const CommentSection = ({ singleSeries }) => {
             <div id="section-title"><strong> Comments: </strong></div>
             <div className="featured-box">
                 {singleSeries.comments && singleSeries.comments.map((comment) => (
-                    <div> {comment} </div>
+                    <div> { comment.text } </div>
                 ))}
                 <div>
                     <form onSubmit={ submitComment }>

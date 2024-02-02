@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { Series, Image } from '../interfaces'
 
 import ChapterForm from '../components/ChapterForm'
 import ChapterDetails from '../components/ChapterDetails'
@@ -13,8 +14,8 @@ const SeriesPage = () => {
 
   const { user } = useAuthContext()
   const { seriesId } = useParams()
-  const [ singleSeries, setSingleSeries ] = useState(null)
-  const [ cover, setCover ] = useState(null)
+  const [ singleSeries, setSingleSeries ] = useState<Series | null>(null)
+  const [ cover, setCover ] = useState<Image | null>(null)
   const [ order, setOrder ] = useState({
     ascending: true,
     icon: "arrow_downward"
@@ -23,11 +24,11 @@ const SeriesPage = () => {
     
   useEffect(() => {
       const fetchSingleSeries = async () => {
-        const response = await fetch(`http://localhost:4000/api/series/${seriesId}`)
+        const response = await fetch(`/api/series/${seriesId}`)
         const json = await response.json()
         setSingleSeries(json)
 
-        const coverRes = await fetch(`http://localhost:4000/api/images/${json.cover}`)
+        const coverRes = await fetch(`/api/images/${json.cover}`)
         const coverJson = await coverRes.json()
         setCover(coverJson)
 
@@ -50,7 +51,7 @@ const SeriesPage = () => {
 
     const imageConverter = () => {
       if (!cover) {
-        return <div className='image-details' width="200" height="300"> </div>
+        return <div className="image-details" style={{ width: '200px', height: '300px' }}> </div>
       }
       const base64String = btoa(new Uint8Array(cover.image.data.data).reduce(function (data, byte) {
           return data + String.fromCharCode(byte)
@@ -65,19 +66,19 @@ const SeriesPage = () => {
       })
     }
 
-    const submitDescription = async (e) => {
+    const submitDescription = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
 
       if (!user) {
         return
       }
 
-      const form = e.target
+      const form = e.currentTarget
       const formData = new FormData(form)
       const updatedSeries = {
           description: formData.get("paragraph-text")
       }
-      const response = await fetch(`http://localhost:4000/api/series/${singleSeries._id}`, {
+      const response = await fetch(`/api/series/${singleSeries._id}`, {
           method: 'PATCH',
           headers: {
               'Content-Type': 'application/json'
@@ -103,7 +104,7 @@ const SeriesPage = () => {
         ))
       }
       else {
-        return singleSeries.chapters && singleSeries.chapters.toReversed().map((chapterId, index) => (
+        return singleSeries.chapters && [...singleSeries.chapters].reverse().map((chapterId, index) => (
           <ChapterDetails 
           singleSeries={singleSeries} 
           key={chapterId} 
@@ -127,7 +128,7 @@ const SeriesPage = () => {
             </div>
             <div className='series-about'>
               <p><strong> Author: </strong> {singleSeries.author} </p>
-              <div style={{ textColor: '#9b9b9b' }}>
+              <div style={{ color: '#9b9b9b' }}>
                 <p><strong> Views: </strong> 
                   <span className="material-symbols-outlined" style={{ fontSize: 15 }}> visibility  </span>
                   {singleSeries.views + 1}
@@ -141,7 +142,7 @@ const SeriesPage = () => {
               <form onSubmit={ submitDescription }>
                 <textarea 
                   name="paragraph-text" 
-                  cols="96" rows="5" 
+                  cols={96} rows={5} 
                   defaultValue={singleSeries.description}> 
                 </textarea>
                 <div className="submit-button">

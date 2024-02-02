@@ -5,8 +5,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: comichub-backend
-    container_name: comichub-node-backend
+    image: webcomic-backend
+    container_name: webcomic-node-backend
     command: /usr/src/app/node_modules/.bin/nodemon server.js
     volumes:
       - ./backend/:/usr/src/app
@@ -32,8 +32,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    image: comichub-frontend
-    container_name: comichub-react-frontend
+    image: webcomic-frontend
+    container_name: webcomic-react-frontend
     command: npm start
     volumes:
       - ./frontend/:/usr/app

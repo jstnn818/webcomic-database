@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useSeriesContext } from '../hooks/useSeriesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useNavigate  } from 'react-router-dom'
+import { Series } from '../interfaces'
 
 //components
 import SeriesDetails from '../components/SeriesDetails'
 import FeaturedSection from '../components/FeaturedSection'
 import SeriesForm from '../components/SeriesForm'
+
 
 const Home = () => {
 
@@ -22,7 +24,7 @@ const Home = () => {
   
     useEffect(() => {
         const fetchSeries = async () => {
-            const response = await fetch('http://localhost:4000/api/series')
+            const response = await fetch('/api/series')
             const json = await response.json()
     
             if (response.ok) {
@@ -41,7 +43,7 @@ const Home = () => {
       }
     }
 
-    const stringCompare = (a, b) => {
+    const stringCompare = (a: Series, b: Series) => {
       var nameA = a.title.toUpperCase()
       var nameB = b.title.toUpperCase()
       if (nameA < nameB) {
@@ -53,7 +55,7 @@ const Home = () => {
       return 0
     }
 
-    const viewsCompare = (a, b) => {
+    const viewsCompare = (a: Series, b: Series) => {
       var viewsDiff = b.views - a.views
       if (viewsDiff === 0) {
         return b.title.localeCompare(a.title);
@@ -69,7 +71,8 @@ const Home = () => {
     }
 
     const seriesListRenderer = () => {
-      const sortedOrder = [...series].sort(stringCompare)
+      if (series) {
+        const sortedOrder = [...series].sort(stringCompare)
 
       if (order.ascending) {
         return series && sortedOrder.map(singleSeries => (
@@ -77,9 +80,10 @@ const Home = () => {
         ))
       }
       else {
-        return series && sortedOrder.toReversed().map(singleSeries => (
+        return series && [...sortedOrder].reverse().map(singleSeries => (
           <SeriesDetails singleSeries={singleSeries} key={singleSeries._id} editMode={editMode}/>
         ))
+      }
       }
     }
 
